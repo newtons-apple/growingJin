@@ -38,6 +38,10 @@ app.get("/game", (req, res) => {
   res.render("game");
 });
 
+app.get("/temp", (req, res) => {
+  res.render("temp");
+})
+
 app.post("/signup", async (req, res) => {
   const { name } = req.body;
 
