@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
+const { mongoURL } = require('../secret'); // src 폴더 바로 아래 secret.js를 만들고 mongoURL을 export 해주세요!
 
 const User = require('./User');
 const Item = require('./Item');
 const Player = require('./Player');
 
-const mongoURL = 'mongodb+srv://jahni:1234@cluster0.tbxh7.mongodb.net/testDB?retryWrites=true&w=majority'
 mongoose.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true });
 
 module.exports = {
