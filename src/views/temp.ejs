@@ -80,6 +80,7 @@
 
         .map_container {
             width: 100%;
+            min-width: 500px;
             height: 60vh;
 
             border: 2px solid;
@@ -155,14 +156,11 @@
             font-size: 60px;
         }
 
-        .left_direct_container, .right_direct_container {
-            background-color: #0078D7;
-            color: white;
-            padding: 10px;
-            font-size: 35px;
-            border: 4px solid black;
+        .dir_btn {
+            cursor: pointer;
+            padding: 15px;
+            font-size: 25px;
         }
-
 
     </style>
     <body>
@@ -170,7 +168,7 @@
             <div class="left_container">
                 <div class="status_container">
                     <div class="profile">
-                        <img 
+                        <img id="profile-img"
                         src="../images/123.jpg"
                         width="100%"
                         height="100%"
@@ -178,10 +176,10 @@
                     </div>
                     <div class="status">
                         <div class="class title">Status</div>
-                        <div class="class">Level : 1 (아기 진) </div>
-                        <div class="class">체력 : 20 / 100</div>
-                        <div class="class">공격력 : 28 </div>
-                        <div class="class">방어력 : 13 </div>
+                        <div id="level">Level : 1 (아기 진) </div>
+                        <div id="hp">체력 : 20 / 100</div>
+                        <div id="str">공격력 : 28 </div>
+                        <div id="def">방어력 : 13 </div>
                     </div>
                 </div>
                 <div class="inventory_container">
@@ -232,14 +230,23 @@
                     □ □ □ □ □ □ □ □ □ □ <br/>
                     □ □ □ □ □ □ □ □ □ □ <br/>
                 </div>
+                
                 <div class="action-container">
                     <div class="direction_container">
-                        <div class="upper_direct_container direction">🔼</div>
-                        <div class="left-right-direction">
-                            <div class="left_direct_container direction" style="margin-right: 100px;">◀</div>
-                            <div class="right_direct_container direction">▶</div>
+                        <div class="upper_direct_container direction">
+                            <button class='dir_btn'>▲</button>
                         </div>
-                        <div class="lower_direct_container direction">🔽</div>
+                        <div class="left-right-direction">
+                            <div class="left_direct_container direction" style="margin-right: 100px;">
+                                <button class='dir_btn'>◀</button>
+                            </div>
+                            <div class="right_direct_container direction">
+                                <button class='dir_btn'>▶</button>
+                            </div>
+                        </div>
+                        <div class="lower_direct_container direction">
+                            <button class='dir_btn'>▼</button>
+                        </div>
                     </div>
                     <div class="attack-run-container">
                         <div class="attack-container">공격하기</div>
@@ -292,6 +299,11 @@
         //     location.href = "/";
         // }
         sendAction("/action", {action: 'query'});
+
+        const move = $('.dir_btn');
+        move.click(() => {
+            sendAction('/action', {action: 'move'});
+        })
 
     </script>
     </body>
