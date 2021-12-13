@@ -43,9 +43,9 @@
       </div>
       <h1><%= gameName %></h1>
       <div class="form_container">
-        <form id="login_form" class="form" action="/signup" method="post">
+        <form id="login_form" class="form" action="/login" method="post">
           <div class="input_container">  
-            <input name="name" placeholder="아이디"/>
+            <input name="id" placeholder="아이디"/>
             <input name="password" placeholder="비밀번호"/>
             <input type="submit" value="로그인"/>
           </div>
@@ -54,11 +54,11 @@
 
       <div class="form_container">
         <h3 style="margin-top: 50px;">아직 아이디가 없으신가요?</h3>
-          <form id="register_form" class="form" action="/register">
+          <form id="register_form" class="form" action="/register" method="post">
             <div class="input_container">  
-              <input name="name" placeholder="아이디"/>
+              <input name="id" placeholder="아이디"/>
               <input name="password" placeholder="비밀번호"/>
-              <input name="re_password" placeholder="비밀번호 확인"/>
+              <input name="repassword" placeholder="비밀번호 확인"/>
               <input type="submit" value="회원가입"/>
             </div>
           </form>
@@ -86,6 +86,7 @@
         }
       });
     });
+
     </script>
   </body>
 </html>
