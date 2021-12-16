@@ -143,9 +143,8 @@
 
         .ending-btn {
             padding: 7px;
-            background-color: red;
+            background-color: rgb(216, 219, 11);
             border-radius: 10px;
-            visibility: hidden;
             cursor: pointer;
         }
 
@@ -164,10 +163,14 @@
             font-size: 60px;
         }
 
-        .dir_btn {
+        .move-btn {
             cursor: pointer;
             padding: 15px;
             font-size: 25px;
+        }
+
+        .hide {
+            visibility: hidden;
         }
 
     </style>
@@ -230,23 +233,23 @@
                 <div class="action-container">
                     <div class="direction_container">
                         <div class="upper_direct_container direction">
-                            <button class='dir_btn'>▲</button>
+                            <button dir="3" class='move-btn'>▲</button>
                         </div>
                         <div class="left-right-direction">
                             <div class="left_direct_container direction" style="margin-right: 100px;">
-                                <button class='dir_btn'>◀</button>
+                                <button dir="1" class='move-btn'>◀</button>
                             </div>
                             <div class="right_direct_container direction">
-                                <button class='dir_btn'>▶</button>
+                                <button dir="0" class='move-btn'>▶</button>
                             </div>
                         </div>
                         <div class="lower_direct_container direction">
-                            <button class='dir_btn'>▼</button>
+                            <button dir="2" class='move-btn'>▼</button>
                         </div>
                     </div>
                     <div class="attack-run-container">
                         <div class="attack-btn">공격하기</div>
-                        <div class="run-btn">도망치기</div>
+                        <div class="run-btn can-run">도망치기</div>
                         <div class="ending-btn">엔딩보기</div>
                     </div>
                 </div>
@@ -255,53 +258,54 @@
 
     <script type="module">
         import { handleMove, handleAttack, handleRun, handleEnding } from '../front/handleAction.js';
-    const sendAction = (url, params = {}) => {
-        $.ajax({
-            url,
-            headers: {
-            Authorization: "Bearer " + key
-            },
-            method: "POST",
-            data: $.param(params),
-        }).done((req) => {
-            const { player, field, event, actions } = req;
-
-            $('#game').text(field.description);
-            $('#position').text(`(${field.x},${field.y})`);
-            const x = field.x;
-            const y = field.y;
-
-            $('#control').html('');
-            req.actions.forEach((action) => {
-                const dom = $('<button></button');
-                dom.text(action.text);
-                dom.bind('click', function () {
-                    sendAction(action.url, action.params);
-                });
-
-                $('#control').append(dom);
-            })
-
-            if (event) {
-                $('#event_result').text(event.description);
-                } else {
-                $('#event_result').text("아무일도 일어나지 않았다.");
-            }
-
-            $('#HP').text(`${player.HP} / ${player.maxHP}`)
-        });
-        } 
 
         const key = localStorage.getItem('_key');
-        if (!key) {
-            location.href = "/";
-        }
+        if (!key) location.href = "/";
+
+        const sendAction = (url, params = {}) => {
+            $.ajax({
+                url,
+                headers: {
+                Authorization: "Bearer " + key
+                },
+                method: "POST",
+                data: $.param(params),
+            }).done((req) => {
+                const { player, field, event, actions } = req;
+
+                $('#game').text(field.description);
+                $('#position').text(`(${field.x},${field.y})`);
+                const x = field.x;
+                const y = field.y;
+
+                $('#control').html('');
+                req.actions.forEach((action) => {
+                    const dom = $('<button></button');
+                    dom.text(action.text);
+                    dom.bind('click', function () {
+                        sendAction(action.url, action.params);
+                    });
+
+                    $('#control').append(dom);
+                })
+
+                if (event) {
+                    $('#event_result').text(event.description);
+                    } else {
+                    $('#event_result').text("아무일도 일어나지 않았다.");
+                }
+
+                $('#HP').text(`${player.HP} / ${player.maxHP}`)
+            });
+        } 
+
         sendAction("/action", {action: 'query'});
 
-        const move = $('.dir_btn');
-        move.click(() => {
-            handleMove(key);
-        })
+        const move = $('.move-btn');
+        for(const dom of move){
+            const domDirection = dom.attributes.dir.value;
+            dom.onclick = () => handleMove(domDirection);
+        }
 
         const attack = $('.attack-btn');
         attack.click(() => {

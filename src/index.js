@@ -70,6 +70,22 @@ app.post("/register", async (req, res) => {
   return res.send('가입이 완료되었습니다. 로그인 후 진을 키워주세요!');
 })
 
+app.post("/move", (req, res) => {
+  console.log('hi move!');
+})
+
+app.post("/attack", (req, res) => {
+  console.log('hi attack!');
+})
+
+app.post("/run", (req, res) => {
+  console.log('hi run!');
+})
+
+app.post("/ending", (req, res) => {
+  console.log('hi ending!');
+})
+
 app.post("/action", authentication, async (req, res) => {
   const { action } = req.body;
   const player = req.player;
