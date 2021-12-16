@@ -1,4 +1,4 @@
-const handleLogin = (key) => {
+const handleLogin = () => {
     if (localStorage.getItem('_key')) location.href = '/game';
     const loginForm = $('#login_form');
     loginForm.submit(e => {
@@ -12,4 +12,24 @@ const handleLogin = (key) => {
     })
 }
 
-export { handleLogin };
+// const handleInit = () => {
+
+// }
+
+const handleMove = () => {
+
+}
+
+const handleAttack = () => {
+
+}
+
+const handleRun = () => {
+
+}
+
+const handleEnding = () => {
+
+}
+
+export { handleLogin, handleMove, handleAttack, handleRun, handleEnding };

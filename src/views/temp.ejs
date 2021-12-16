@@ -253,7 +253,8 @@
             </div>
         </div>
 
-    <script>
+    <script type="module">
+        import { handleMove, handleAttack, handleRun, handleEnding } from '../front/handleAction.js';
     const sendAction = (url, params = {}) => {
         $.ajax({
             url,
@@ -289,22 +290,22 @@
 
             $('#HP').text(`${player.HP} / ${player.maxHP}`)
         });
-
         } 
+
         const key = localStorage.getItem('_key');
-        // if (!key) {
-        //     location.href = "/";
-        // }
+        if (!key) {
+            location.href = "/";
+        }
         sendAction("/action", {action: 'query'});
 
         const move = $('.dir_btn');
         move.click(() => {
-            sendAction('/move');
+            handleMove(key);
         })
 
         const attack = $('.attack-btn');
         attack.click(() => {
-            sendAction('/attack');
+            handleAttack(key);
         })
 
         const run = $('.run-btn');

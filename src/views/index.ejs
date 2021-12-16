@@ -47,7 +47,7 @@
         <form id="login_form" class="form" action="/login" method="post">
           <div class="input_container">  
             <input name="id" placeholder="아이디"/>
-            <input name="password" placeholder="비밀번호"/>
+            <input name="password" type="password" placeholder="비밀번호"/>
             <input type="submit" value="로그인"/>
           </div>
         </form>
@@ -58,24 +58,18 @@
           <form id="register_form" class="form" action="/register" method="post">
             <div class="input_container">  
               <input name="id" placeholder="아이디"/>
-              <input name="password" placeholder="비밀번호"/>
-              <input name="repassword" placeholder="비밀번호 확인"/>
+              <input name="password" type="password" placeholder="비밀번호"/>
+              <input name="repassword" type="password" placeholder="비밀번호 확인"/>
               <input type="submit" value="회원가입"/>
             </div>
           </form>
       </div>
-
     </div>
-    
 
     <script type="module">
-      import { handleLogin } from '../front/index.js';
-      
-      const key = localStorage.getItem('_key');
-      if (key) location.href = '/game';
-      handleLogin(key);
-    
-
+      import { handleLogin } from '../front/handleAction.js';
+      handleLogin();
     </script>
+
   </body>
 </html>
