@@ -87,7 +87,7 @@
             border-radius: 10px;
             margin-bottom: 10px;
 
-            font-size: 35px;
+            font-size: 30px;
             text-align: center;
             padding-top: 40px;
 
@@ -299,22 +299,22 @@
 
         const move = $('.dir_btn');
         move.click(() => {
-            sendAction('/move', {action: 'move'});
+            sendAction('/move');
         })
 
         const attack = $('.attack-btn');
         attack.click(() => {
-            sendAction('/attack', {action: 'attack'});
+            sendAction('/attack');
         })
 
         const run = $('.run-btn');
         run.click(() => {
-            sendAction('/run', {action: 'run'});
+            sendAction('/run');
         })
 
         const ending = $('.ending-btn');
         ending.click(() => {
-            sendAction('/ending', {action: 'ending'});
+            sendAction('/ending');
         })
 
         const makeMap = (x, y, level) => {
