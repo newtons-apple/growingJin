@@ -119,6 +119,7 @@
         .attack-run-container {
             display: flex;
             flex-direction: column;
+            justify-content: space-around;
 
             width: 40%;
             text-align: center;
@@ -126,19 +127,26 @@
             font-size: 25px;
         }
 
-        .attack-container {
+        .attack-btn {
             padding: 7px;
-            margin: 30px 20px;
             background-color:coral;
             border-radius: 10px;
+            cursor: pointer;
         }
 
-        .run-container {
+        .run-btn {
             padding: 7px;
-            margin: 30px 20px;
             background-color: red;
             border-radius: 10px;
+            cursor: pointer;
+        }
 
+        .ending-btn {
+            padding: 7px;
+            background-color: red;
+            border-radius: 10px;
+            visibility: hidden;
+            cursor: pointer;
         }
 
         .title {
@@ -218,19 +226,7 @@
                 </div>
             </div>
             <div class="right_container">
-                <div class="map_container">
-                    □ □ □ □ □ □ □ □ □ □ <br/>
-                    □ ■ □ □ □ □ □ □ □ □ <br/>
-                    □ □ □ □ □ □ □ □ □ □ <br/>
-                    □ □ □ □ □ □ □ □ □ □ <br/>
-                    □ □ □ □ □ □ □ □ □ □ <br/>
-                    □ □ □ □ □ □ □ □ □ □ <br/>
-                    □ □ □ □ □ □ □ □ □ □ <br/>
-                    □ □ □ □ □ □ □ □ □ □ <br/>
-                    □ □ □ □ □ □ □ □ □ □ <br/>
-                    □ □ □ □ □ □ □ □ □ □ <br/>
-                </div>
-                
+                <div class="map_container"></div>
                 <div class="action-container">
                     <div class="direction_container">
                         <div class="upper_direct_container direction">
@@ -249,8 +245,9 @@
                         </div>
                     </div>
                     <div class="attack-run-container">
-                        <div class="attack-container">공격하기</div>
-                        <div class="run-container">도망치기</div>
+                        <div class="attack-btn">공격하기</div>
+                        <div class="run-btn">도망치기</div>
+                        <div class="ending-btn">엔딩보기</div>
                     </div>
                 </div>
             </div>
@@ -302,9 +299,41 @@
 
         const move = $('.dir_btn');
         move.click(() => {
-            sendAction('/action', {action: 'move'});
+            sendAction('/move', {action: 'move'});
         })
 
+        const attack = $('.attack-btn');
+        attack.click(() => {
+            sendAction('/attack', {action: 'attack'});
+        })
+
+        const run = $('.run-btn');
+        run.click(() => {
+            sendAction('/run', {action: 'run'});
+        })
+
+        const ending = $('.ending-btn');
+        ending.click(() => {
+            sendAction('/ending', {action: 'ending'});
+        })
+
+        const makeMap = (x, y, level) => {
+            const canGoHeight = {'1': [0, 0], '2': [1, 2], '3': [3, 5], '4': [6, 9]};
+            let map = '';
+            const canGoLine = "□ ".repeat(10) + "<br/>";
+            const nowLine = "□ ".repeat(x) + "■ " + "□ ".repeat(9 - x) + "<br/>";
+            const canNotGoLine = "▧ ".repeat(10) + "<br/>";
+            const [bottom, top] = canGoHeight[level];
+
+            for (let i = 9; i >= 0; i--){
+                if (i > top || i < bottom) map += canNotGoLine;
+                else if (y === i) map += nowLine;
+                else map += canGoLine;
+            }
+            return map;
+        }
+
+        $('.map_container').html(makeMap(2,2,2));
     </script>
     </body>
 </html>
