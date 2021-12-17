@@ -8,9 +8,9 @@ const schema = new Schema({
   level: { type: Number, default: 1 },
   exp: { type: Number, default: 0 },
 
-  maxHP: { type: Number, default: 10 },
-  HP: { type: Number, default: 10 },
-  str: { type: Number, default: 5 },
+  maxHp: { type: Number, default: 100 },
+  HP: { type: Number, default: 100 },
+  str: { type: Number, default: 20 },
   def: { type: Number, default: 5 },
   x: { type: Number, default: 0 },
   y: { type: Number, default: 0 },
@@ -18,8 +18,8 @@ const schema = new Schema({
   user: { type: Schema.Types.ObjectId, ref: 'User'},
 });
 
-schema.methods.incrementHP = function (val) {
-  const hp = this.HP + val;
+schema.methods.incrementHP = function (hp) {
+  const _hp = this.HP + hp;
   this.HP = Math.min(Math.max(0, hp), this.maxHP);
 };
 
