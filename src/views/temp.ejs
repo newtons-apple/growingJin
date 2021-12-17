@@ -57,7 +57,7 @@
             margin-left: 20px;
         }
 
-        .display_container {
+        .display-container {
             width: 100%;
             height: 30%;
 
@@ -70,7 +70,7 @@
             overflow: auto;
         }
 
-        .right_container {
+        .right-container {
             display: flex;
             flex-direction: column;
             
@@ -78,19 +78,27 @@
             height: 90vh;
         }
 
-        .map_container {
+        .map-container {
             width: 100%;
+            min-width: 500px;
             height: 60vh;
 
             border: 2px solid;
             border-radius: 10px;
             margin-bottom: 10px;
 
-            font-size: 35px;
+            font-size: 30px;
             text-align: center;
             padding-top: 40px;
 
             overflow: auto;
+        }
+
+        .map-description {
+            margin-bottom: 30px;
+            font-size: 20px;
+            font-weight: 600;
+            /* color: blueviolet; */
         }
 
         .action-container {
@@ -118,6 +126,7 @@
         .attack-run-container {
             display: flex;
             flex-direction: column;
+            justify-content: space-around;
 
             width: 40%;
             text-align: center;
@@ -125,19 +134,25 @@
             font-size: 25px;
         }
 
-        .attack-container {
+        .attack-btn {
             padding: 7px;
-            margin: 30px 20px;
             background-color:coral;
             border-radius: 10px;
+            cursor: pointer;
         }
 
-        .run-container {
+        .run-btn {
             padding: 7px;
-            margin: 30px 20px;
             background-color: red;
             border-radius: 10px;
+            cursor: pointer;
+        }
 
+        .ending-btn {
+            padding: 7px;
+            background-color: rgb(216, 219, 11);
+            border-radius: 10px;
+            cursor: pointer;
         }
 
         .title {
@@ -155,14 +170,15 @@
             font-size: 60px;
         }
 
-        .left_direct_container, .right_direct_container {
-            background-color: #0078D7;
-            color: white;
-            padding: 10px;
-            font-size: 35px;
-            border: 4px solid black;
+        .move-btn {
+            cursor: pointer;
+            padding: 15px;
+            font-size: 25px;
         }
 
+        .hide {
+            visibility: hidden;
+        }
 
     </style>
     <body>
@@ -170,7 +186,7 @@
             <div class="left_container">
                 <div class="status_container">
                     <div class="profile">
-                        <img 
+                        <img id="profile-img"
                         src="../images/123.jpg"
                         width="100%"
                         height="100%"
@@ -178,10 +194,10 @@
                     </div>
                     <div class="status">
                         <div class="class title">Status</div>
-                        <div class="class">Level : 1 (아기 진) </div>
-                        <div class="class">체력 : 20 / 100</div>
-                        <div class="class">공격력 : 28 </div>
-                        <div class="class">방어력 : 13 </div>
+                        <div id="level">Level : 1 (아기 진) </div>
+                        <div id="hp">체력 : 20 / 100</div>
+                        <div id="str">공격력 : 28 </div>
+                        <div id="def">방어력 : 13 </div>
                     </div>
                 </div>
                 <div class="inventory_container">
@@ -211,7 +227,7 @@
                         <div>M1 맥북 : 2 개</div>
                     </div>
                 </div>
-                <div class="display_container">
+                <div class="display-container">
                     <div class="display_title title">대화창</div>
                     <div class="display_content">
                         <div class="display_event" style="margin-bottom: 10px;">담당 일진(이)가 나타났다!</div>
@@ -219,80 +235,120 @@
                     </div>
                 </div>
             </div>
-            <div class="right_container">
-                <div class="map_container">
-                    □ □ □ □ □ □ □ □ □ □ <br/>
-                    □ ■ □ □ □ □ □ □ □ □ <br/>
-                    □ □ □ □ □ □ □ □ □ □ <br/>
-                    □ □ □ □ □ □ □ □ □ □ <br/>
-                    □ □ □ □ □ □ □ □ □ □ <br/>
-                    □ □ □ □ □ □ □ □ □ □ <br/>
-                    □ □ □ □ □ □ □ □ □ □ <br/>
-                    □ □ □ □ □ □ □ □ □ □ <br/>
-                    □ □ □ □ □ □ □ □ □ □ <br/>
-                    □ □ □ □ □ □ □ □ □ □ <br/>
+            <div class="right-container">
+                <div class="map-container">
+                    <div class="map-description">현재 위치 : 집 - 거실 / 거실엔 장난감이 있다.. </div>
+                    <div class="map"></div>
                 </div>
                 <div class="action-container">
                     <div class="direction_container">
-                        <div class="upper_direct_container direction">🔼</div>
-                        <div class="left-right-direction">
-                            <div class="left_direct_container direction" style="margin-right: 100px;">◀</div>
-                            <div class="right_direct_container direction">▶</div>
+                        <div class="upper_direct_container direction">
+                            <button dir="3" class='move-btn'>▲</button>
                         </div>
-                        <div class="lower_direct_container direction">🔽</div>
+                        <div class="left-right-direction">
+                            <div class="left_direct_container direction" style="margin-right: 100px;">
+                                <button dir="1" class='move-btn'>◀</button>
+                            </div>
+                            <div class="right_direct_container direction">
+                                <button dir="0" class='move-btn'>▶</button>
+                            </div>
+                        </div>
+                        <div class="lower_direct_container direction">
+                            <button dir="2" class='move-btn'>▼</button>
+                        </div>
                     </div>
                     <div class="attack-run-container">
-                        <div class="attack-container">공격하기</div>
-                        <div class="run-container">도망치기</div>
+                        <div class="attack-btn">공격하기</div>
+                        <div class="run-btn can-run">도망치기</div>
+                        <div class="ending-btn">엔딩보기</div>
                     </div>
                 </div>
             </div>
         </div>
 
-    <script>
-    const sendAction = (url, params = {}) => {
-        $.ajax({
-            url,
-            headers: {
-            Authorization: "Bearer " + key
-            },
-            method: "POST",
-            data: $.param(params),
-        }).done((req) => {
-            const { player, field, event, actions } = req;
+    <script type="module">
+        import { handleMove, handleAttack, handleRun, handleEnding } from '../front/handleAction.js';
 
-            $('#game').text(field.description);
-            $('#position').text(`(${field.x},${field.y})`);
-            const x = field.x;
-            const y = field.y;
-
-            $('#control').html('');
-            req.actions.forEach((action) => {
-                const dom = $('<button></button');
-                dom.text(action.text);
-                dom.bind('click', function () {
-                    sendAction(action.url, action.params);
-                });
-
-                $('#control').append(dom);
-            })
-
-            if (event) {
-                $('#event_result').text(event.description);
-                } else {
-                $('#event_result').text("아무일도 일어나지 않았다.");
-            }
-
-            $('#HP').text(`${player.HP} / ${player.maxHP}`)
-        });
-
-        } 
         const key = localStorage.getItem('_key');
-        // if (!key) {
-        //     location.href = "/";
-        // }
+        if (!key) location.href = "/";
+
+        const sendAction = (url, params = {}) => {
+            $.ajax({
+                url,
+                headers: {
+                Authorization: "Bearer " + key
+                },
+                method: "POST",
+                data: $.param(params),
+            }).done((req) => {
+                const { player, field, event, actions } = req;
+
+                $('#game').text(field.description);
+                $('#position').text(`(${field.x},${field.y})`);
+                const x = field.x;
+                const y = field.y;
+
+                $('#control').html('');
+                req.actions.forEach((action) => {
+                    const dom = $('<button></button');
+                    dom.text(action.text);
+                    dom.bind('click', function () {
+                        sendAction(action.url, action.params);
+                    });
+
+                    $('#control').append(dom);
+                })
+
+                if (event) {
+                    $('#event_result').text(event.description);
+                    } else {
+                    $('#event_result').text("아무일도 일어나지 않았다.");
+                }
+
+                $('#HP').text(`${player.HP} / ${player.maxHP}`)
+            });
+        } 
+
         sendAction("/action", {action: 'query'});
 
+        const move = $('.move-btn');
+        for(const dom of move){
+            const domDirection = dom.attributes.dir.value;
+            dom.onclick = () => handleMove(domDirection);
+        }
+
+        const attack = $('.attack-btn');
+        attack.click(() => {
+            handleAttack(key);
+        })
+
+        const run = $('.run-btn');
+        run.click(() => {
+            sendAction('/run');
+        })
+
+        const ending = $('.ending-btn');
+        ending.click(() => {
+            sendAction('/ending');
+        })
+
+        const makeMap = (x, y, level) => {
+            const canGoHeight = {'1': [0, 0], '2': [1, 2], '3': [3, 5], '4': [6, 9]};
+            let map = '';
+            const canGoLine = "□ ".repeat(10) + "<br/>";
+            const nowLine = "□ ".repeat(x) + "■ " + "□ ".repeat(9 - x) + "<br/>";
+            const canNotGoLine = "▧ ".repeat(10) + "<br/>";
+            const [bottom, top] = canGoHeight[level];
+
+            for (let i = 9; i >= 0; i--){
+                if (i > top || i < bottom) map += canNotGoLine;
+                else if (y === i) map += nowLine;
+                else map += canGoLine;
+            }
+            return map;
+        }
+
+        $('.map').html(makeMap(2,2,2));
     </script>
     </body>
 </html>
