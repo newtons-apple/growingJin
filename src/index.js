@@ -6,6 +6,8 @@ const crypto = require("crypto");
 const { constantManager, mapManager } = require("./datas/Manager");
 const { User, Item, Player } = require("./models");
 const { encryptPassword } = require("./util");
+const attack = require('./controller/attack');
+
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
