@@ -194,10 +194,11 @@
                     </div>
                     <div class="status">
                         <div class="class title">Status</div>
-                        <div id="level">Level : 1 (아기 진) </div>
-                        <div id="hp">체력 : 20 / 100</div>
-                        <div id="str">공격력 : 28 </div>
-                        <div id="def">방어력 : 13 </div>
+                        <div id="level"></div>
+                        <div id="hp"></div>
+                        <div id="str"></div>
+                        <div id="def"></div>
+                        <div id="exp"></div>
                     </div>
                 </div>
                 <div class="inventory_container">
@@ -205,17 +206,6 @@
                     <div class="inventory">
                         <div>텐텐 : 3 개</div>
                         <div>연필 : 2 개</div>
-                        <div>M1 맥북 : 2 개</div>
-                        <div>M1 맥북 : 2 개</div>
-                        <div>M1 맥북 : 2 개</div>
-                        <div>M1 맥북 : 2 개</div>
-                        <div>M1 맥북 : 2 개</div>
-                        <div>M1 맥북 : 2 개</div>
-                        <div>M1 맥북 : 2 개</div>
-                        <div>M1 맥북 : 2 개</div>
-                        <div>M1 맥북 : 2 개</div>
-                        <div>M1 맥북 : 2 개</div>
-                        <div>M1 맥북 : 2 개</div>
                         <div>M1 맥북 : 2 개</div>
                         <div>M1 맥북 : 2 개</div>
                         <div>M1 맥북 : 2 개</div>
@@ -267,49 +257,49 @@
         </div>
 
     <script type="module">
-        import { handleMove, handleAttack, handleRun, handleEnding } from '../front/handleAction.js';
+        import { handleView, handleMove, handleAttack, handleRun, handleEnding } from '../front/handleAction.js';
 
         const key = localStorage.getItem('_key');
         if (!key) location.href = "/";
 
-        const sendAction = (url, params = {}) => {
-            $.ajax({
-                url,
-                headers: {
-                Authorization: "Bearer " + key
-                },
-                method: "POST",
-                data: $.param(params),
-            }).done((req) => {
-                const { player, field, event, actions } = req;
+        // const sendAction = (url, params = {}) => {
+        //     $.ajax({
+        //         url,
+        //         headers: {
+        //         Authorization: "Bearer " + key
+        //         },
+        //         method: "POST",
+        //         data: $.param(params),
+        //     }).done((req) => {
+        //         const { player, field, event, actions } = req;
 
-                $('#game').text(field.description);
-                $('#position').text(`(${field.x},${field.y})`);
-                const x = field.x;
-                const y = field.y;
+        //         $('#game').text(field.description);
+        //         $('#position').text(`(${field.x},${field.y})`);
+        //         const x = field.x;
+        //         const y = field.y;
 
-                $('#control').html('');
-                req.actions.forEach((action) => {
-                    const dom = $('<button></button');
-                    dom.text(action.text);
-                    dom.bind('click', function () {
-                        sendAction(action.url, action.params);
-                    });
+        //         $('#control').html('');
+        //         req.actions.forEach((action) => {
+        //             const dom = $('<button></button');
+        //             dom.text(action.text);
+        //             dom.bind('click', function () {
+        //                 sendAction(action.url, action.params);
+        //             });
 
-                    $('#control').append(dom);
-                })
+        //             $('#control').append(dom);
+        //         })
 
-                if (event) {
-                    $('#event_result').text(event.description);
-                    } else {
-                    $('#event_result').text("아무일도 일어나지 않았다.");
-                }
+        //         if (event) {
+        //             $('#event_result').text(event.description);
+        //             } else {
+        //             $('#event_result').text("아무일도 일어나지 않았다.");
+        //         }
 
-                $('#HP').text(`${player.HP} / ${player.maxHP}`)
-            });
-        } 
+        //         $('#HP').text(`${player.HP} / ${player.maxHP}`)
+        //     });
+        // } 
 
-        sendAction("/action", {action: 'query'});
+        // sendAction("/action", {action: 'query'});
 
         const move = $('.move-btn');
         for(const dom of move){
@@ -332,23 +322,10 @@
             sendAction('/ending');
         })
 
-        const makeMap = (x, y, level) => {
-            const canGoHeight = {'1': [0, 0], '2': [1, 2], '3': [3, 5], '4': [6, 9]};
-            let map = '';
-            const canGoLine = "□ ".repeat(10) + "<br/>";
-            const nowLine = "□ ".repeat(x) + "■ " + "□ ".repeat(9 - x) + "<br/>";
-            const canNotGoLine = "▧ ".repeat(10) + "<br/>";
-            const [bottom, top] = canGoHeight[level];
+        
 
-            for (let i = 9; i >= 0; i--){
-                if (i > top || i < bottom) map += canNotGoLine;
-                else if (y === i) map += nowLine;
-                else map += canGoLine;
-            }
-            return map;
-        }
-
-        $('.map').html(makeMap(2,2,2));
+        // $('.map').html(makeMap(2,2,2));
+        handleView();
     </script>
     </body>
 </html>
