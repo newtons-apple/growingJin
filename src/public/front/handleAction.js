@@ -40,7 +40,8 @@ const handleAction = async (action, method, data) => {
   items.push('쪽쪽이 : 2 개 (임시)');
   const log = state ? state.log : `담당 일진(이)가 나타났다. <br/> 진아 빵좀 사와라... 진아 빵좀 사와라... 진아 빵좀 사와라...`;
   const isFighting = state ? state.isFighting : 'true';
-
+  
+  $('#profile-img').attr("src", `../images/${level}.png`)
   $('#level').text(`Level : ${level} (${levelSet[level]}) `);
   $('#hp').text(`체력 : ${HP} / ${maxHP} `);
   $('#str').text(`공격력 : ${str} `);
