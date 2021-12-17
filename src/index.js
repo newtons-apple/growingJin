@@ -80,12 +80,20 @@ app.post("/attack", (req, res) => {
   console.log('hi attack!');
 })
 
-app.post("/run", (req, res) => {
+app.get("/run", (req, res) => {
   console.log('hi run!');
 })
 
-app.post("/ending", (req, res) => {
+app.get("/ending", (req, res) => {
   console.log('hi ending!');
+})
+
+app.get("/reset", (req, res) => {
+  console.log('hi reset!');
+})
+
+app.get("/view", authentication, async (req, res) => {
+  res.send(req.player);
 })
 
 app.post("/action", authentication, async (req, res) => {
