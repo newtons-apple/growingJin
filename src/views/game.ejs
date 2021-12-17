@@ -250,7 +250,7 @@
         </div>
 
     <script type="module">
-        import { handleView, handleMove, handleAttack, handleRun, handleEnding } from '../front/handleAction.js';
+        import { handleAction } from '../front/handleAction.js';
 
         const key = localStorage.getItem('_key');
         if (!key) location.href = "/"
@@ -258,25 +258,25 @@
         const move = $('.move-btn');
         for(const dom of move){
             const domDirection = dom.attributes.dir.value;
-            dom.onclick = () => handleMove(domDirection);
+            dom.onclick = () => handleAction('move', 'POST', { direction: domDirection });
         }
 
         const attack = $('.attack-btn');
         attack.click(() => {
-            handleAttack(key);
+            handleAction('attack', 'GET');
         })
 
         const run = $('.run-btn');
         run.click(() => {
-            sendAction('/run');
+            handleAction('run', 'GET');
         })
 
         const ending = $('.ending-btn');
         ending.click(() => {
-            sendAction('/ending');
+            handleAction('ending', 'GET');
         })
 
-        handleView();
+        handleAction('view', 'GET');
     </script>
     </body>
 </html>
