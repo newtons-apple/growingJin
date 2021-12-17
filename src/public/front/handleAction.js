@@ -22,16 +22,45 @@ const handleView = () => {
     },
     method: "GET"
   }).done(res => {
-    const { x, y, level, exp, HP, maxHP, str, def } = res;
+    const { x, y, level, exp, HP, maxHP, str, def, state, items } = res;
+    // const { isFighting, enemy, log } = state;
     const levelSet = {1: '아기 진', 2: '청소년 진', 3: '개발자 진', 4: 'CEO 진'};
-    const expSet = {1: ['키', 'cm'], 2: ['성적', '점'], 3: ['코딩 실력', ''], 4: ['기업 가치', '억']};
+    const expSet = {1: ['키', 'cm'], 2: ['성적', '점'], 3: ['git commit', '번'], 4: ['기업 가치', '억']};
+    // 추후 삭제
+    items.push('맥북 : 1 개 (임시)');
+    items.push('연필 : 3 개 (임시)');
+    items.push('쪽쪽이 : 2 개 (임시)');
+    items.push('쪽쪽이 : 2 개 (임시)');
+    items.push('쪽쪽이 : 2 개 (임시)');
+    items.push('쪽쪽이 : 2 개 (임시)');
+    items.push('쪽쪽이 : 2 개 (임시)');
+    items.push('쪽쪽이 : 2 개 (임시)');
+    items.push('쪽쪽이 : 2 개 (임시)');
+    items.push('쪽쪽이 : 2 개 (임시)');
+    items.push('쪽쪽이 : 2 개 (임시)');
+    const log = `담당 일진(이)가 나타났다. <br/> 진아 빵좀 사와라... 진아 빵좀 사와라... 진아 빵좀 사와라...`;
+    const isFighting = 'true';
 
     $('#level').text(`Level : ${level} (${levelSet[level]}) `);
     $('#hp').text(`체력 : ${HP} / ${maxHP} `);
     $('#str').text(`공격력 : ${str} `);
     $('#def').text(`방어력 : ${def} `);
-    $('#exp').text(`${expSet[level][0]} : ${exp} `);
-    
+    $('#exp').text(`${expSet[level][0]} : ${exp} ${expSet[level][1]} `);
+    $('.display_event_line').html(log);
+    items.forEach(item => {
+      const dom = $('<div class="item"></div>');
+      dom.text(item);
+      $('.inventory').append(dom);
+    })
+
+    // true 가 문자열로 오진 않는지 체크
+    if (isFighting) {
+      $('.attack-btn').removeClass('hide');
+      $('.run-btn').removeClass('hide');
+    }
+
+    if (level === 4) $('.ending-btn').removeClass('hide');
+
     $('.map').html(makeMap(x, y, level));
   })
 
