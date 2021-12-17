@@ -1,6 +1,10 @@
-const attack = async (req)=>{
+const {monsterManager} = require('../datas/Manager');
 
-return;
+const attack = async (req, res) => {
+    const player = req.player;
+    const monster = monsterManager.getMonster(player.state.enemy.id)
+
+    return;
 }
 
 module.exports = {
