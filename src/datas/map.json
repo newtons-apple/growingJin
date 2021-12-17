@@ -1,27 +1,637 @@
 {
   "id": 1,
   "fields": [
-    [0, 0, "평원의 시작점이다.", [0, 1, 1, 0], []],
+    
     [
-      1,
+      3,
       0,
-      "왠지 몬스터가 나올 것 같은 그런 스산한 분위기가 느껴진다.",
-      [0, 0, 1, 1],
+      "대학 - 학과 전산실 / 개발자를 꿈꾸는 동기와 후배들이 오늘도 열심이다.",
+      [1, 0, 0, 1],
       [
         { "type": "battle", "monster": 1, "percent": 70 },
         { "type": "item", "item": 1, "percent": 30 }
       ]
-    ],
-    [
-      0,
+    ],[
+      3,
       1,
-      "행운이 찾아올 것 같다.",
-      [1, 1, 0, 0],
+      "대학 - 웹개발 동아리실 / 새로 들어간 동아리, 다들 개성이 강하다.. 친구할만한 사람이 안 보인다..",
+      [1, 1, 0, 1],
       [
-        { "type": "item", "item": 1, "percent": 70 },
-        { "type": "battle", "enemy": 1, "percent": 30 }
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
       ]
-    ],
-    [1, 1, "아무것도 없다.", [1, 0, 0, 1], [], []]
+    ],[
+      3,
+      2,
+      "대학 - 학생식당 / 양이 적다.. 리필을 하도 자주 했더니 날 알아보신다...",
+      [1, 1, 0, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      3,
+      3,
+      "홍대앞 - 헌팅포차 / 오늘은 예감이 좋다",
+      [1, 1, 0, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      3,
+      4,
+      "대성리 - MT촌 / @__@",
+      [1, 1, 0, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      3,
+      5,
+      "대학 - 도서관 / 대학 오면 놀기만 할 줄 알았으나..",
+      [1, 1, 0, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      3,
+      6,
+      "대학 - 화장실 / 대학에 왔는데도.. 안나온다..",
+      [1, 1, 0, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      3,
+      7,
+      "대학가 - PC방 / 스타크래프트가 날 위로한다",
+      [1, 1, 0, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      3,
+      8,
+      "대학가 - 골목길 / 취객들은 무섭다",
+      [1, 1, 0, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      3,
+      9,
+      "대학가 - 자취방 / 청소를 마지막으로 한 게 언제더라..",
+      [0, 1, 0, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      4,
+      0,
+      "대학가 - 자취방 / 술취한 친구가 옆에서 자고 있다..",
+      [1, 0, 1, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      4,
+      1,
+      "논산시 - 육군훈련소 / 나는 누구 여긴 어디?",
+      [1, 1, 1, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      4,
+      2,
+      "OO사단 - 사지방 / 이렇게 시간 쪼개서 노력하다보면 나가서 훌륭한 개발자가 될 수 있겠지?",
+      [1, 1, 1, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      4,
+      3,
+      "대학가 - 비둘기포차 / 친구들은 취업 문제로 고민이 많다.. 내 꿈은 확고하다",
+      [1, 1, 1, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      4,
+      4,
+      "회사 - 면접 대기실 / 자기소개서를 너무 소설로 썼나.. 걱정된다",
+      [1, 1, 1, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      4,
+      5,
+      "회사앞 - 농협은행 / 첫 월급을 현금으로 뽑는 기분 ^_^",
+      [1, 1, 1, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      4,
+      6,
+      "회사앞 - 정육식당 / 부장님 달려요 @_@",
+      [1, 1, 1, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      4,
+      7,
+      "성남시 - 여자친구 집 / 배수관을 왜 내가 뚫어주고 있지?",
+      [1, 1, 1, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      4,
+      8,
+      "회사 - 사무실 / 분명히 오늘은 주말이다",
+      [1, 1, 1, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      4,
+      9,
+      "회사 - 부장님사무실 / 무슨 일인진 모르겠지만 일단 대기중이다",
+      [0, 1, 1, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      5,
+      0,
+      "회사 - 화장실 / 9시는 주식 개장시간.. 옆 칸에서 매수 체결소리가 들린다?",
+      [1, 0, 1, 0],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      5,
+      1,
+      "회사앞 - 자취방 / 회사, 집 반복이 너무 지겹다.. 외롭다..",
+      [1, 1, 1, 0],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      5,
+      2,
+      "강남역 - 레스토랑 / 소개팅녀가 많이 늦는듯하다",
+      [1, 1, 1, 0],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      5,
+      3,
+      "회사앞 - 자취방 / 배달음식 용기가 쌓여있다..",
+      [1, 1, 1, 0],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      5,
+      4,
+      "회사 - 휴게실 / 다들 코인 이야기를 하고 있다",
+      [1, 1, 1, 0],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      5,
+      5,
+      "한남동 - 레스토랑 / 사업 성공한 선배가 스테이크를 썰어준다. 나도 저렇게 되고싶다..",
+      [1, 1, 1, 0],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      5,
+      6,
+      "회사앞 - 농협은행 / 명절을 앞두고 부모님 용돈을 인출하는 기분 ^_^",
+      [1, 1, 1, 0],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      5,
+      7,
+      "강남역 - 호랑이포차 / 오랜만에 만나는 대학 동기들. 나와 뜻이 맞는 친구가 있을지도?",
+      [1, 1, 1, 0],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      5,
+      8,
+      "강남역 - 스타벅스 / 나와 함께 역사를 만들어갈 친구를 설득했다",
+      [1, 1, 1, 0],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      5,
+      9,
+      "회사 - 사무실 / 내 회사는 이딴 식으로 운영하진 않겠어",
+      [0, 1, 1, 0],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      6,
+      0,
+      "판교 - 현대백화점 / CEO의 품위는 옷에서 나온다",
+      [1, 0, 0, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      6,
+      1,
+      "판교 - 서브웨이 / 바쁘다 바빠",
+      [1, 1, 0, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      6,
+      2,
+      "내 회사 - 회의실 / 카리스마 뽐내는 중",
+      [1, 1, 0, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      6,
+      3,
+      "홍대앞 - 헌팅포차 / 오늘은 예감이 좋다",
+      [1, 1, 0, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      6,
+      4,
+      "한남동 - 레스토랑 / CEO가 되니 소개팅에서도 자신감이 샘솟는다",
+      [1, 1, 0, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      6,
+      5,
+      "내 회사 - 사무실 / 직원들이 퇴근을 하지 않고 있다. 분명 먼저 가도 된다고 말했는데..",
+      [1, 1, 0, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      6,
+      6,
+      "내 회사 - 화장실 / 이제 정말 안나온다..",
+      [1, 1, 0, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      6,
+      7,
+      "반포 - 해피부동산 / 집값이 많이 오르긴 했지만 이정돈 감당 가능하다",
+      [1, 1, 0, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      6,
+      8,
+      "판교역 - 골목길 / 취객들은 여전히 무섭다",
+      [1, 1, 0, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      6,
+      9,
+      "반포 - 우리집 / 이사는 힘들다",
+      [0, 1, 0, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      7,
+      0,
+      "반포 - 우리집 / 넓어졌지만 여전히 어질러진 집..",
+      [1, 0, 1, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      7,
+      1,
+      "판교 - 버거킹 / 바쁘다 바빠 현대사회",
+      [1, 1, 1, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      7,
+      2,
+      "내 회사 - 회의실 / 이번 투자유치 중요한거 다들 알지?",
+      [1, 1, 1, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      7,
+      3,
+      "판교 - 현대백화점 / 여자친구 선물 고르는건 언제나 어렵다",
+      [1, 1, 1, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      7,
+      4,
+      "내 회사 - 사무실 / 경비아저씨가 너무 늦게까지 일하는거 아니냐고 하신다",
+      [1, 1, 1, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      7,
+      5,
+      "내 회사 - 회의실 / 점심은 간단하게 김밥 배달으로",
+      [1, 1, 1, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      7,
+      6,
+      "코엑스 - 스타트업 엑스포 / 다들 준비가 한창이다",
+      [1, 1, 1, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      7,
+      7,
+      "강남역 - 소고기집 / CEO에게 인맥 관리는 중요하다",
+      [1, 1, 1, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      7,
+      8,
+      "내 회사 - 사무실 / 주말에도 직원이 많은 회사, 바람직하다",
+      [1, 1, 1, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      7,
+      9,
+      "강남 - 결혼식장 / 결혼이라니.. 눈물을 참지 못하시는 부모님",
+      [0, 1, 1, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      8,
+      0,
+      "하와이 - 와이키키해변 / 여유롭게 태닝을 즐기는 사람들. 신혼여행 중에도 업무 연락은 온다",
+      [1, 0, 1, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      8,
+      1,
+      "인천 - 인천국제공항 / 핸드폰을 켜니 부재중 전화가 잔뜩이다",
+      [1, 1, 1, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      8,
+      2,
+      "내 회사 - 사무실 / 직원들이 준비한 생일파티.. 감동이다",
+      [1, 1, 1, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      8,
+      3,
+      "강남 - 프렌치레스토랑 / 조만간 좋은 소식을 기대해봐도 좋을 것 같다",
+      [1, 1, 1, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      8,
+      4,
+      "김포 - 김포국제공항 / 비즈니스 맨은 바쁘다",
+      [1, 1, 1, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      8,
+      5,
+      "회사앞 - 기업은행 / 설날을 앞두고 세뱃돈을 뽑는다. 조카들은 참 좋은 삼촌을 뒀다",
+      [1, 1, 1, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      8,
+      6,
+      "판교 - 버거킹 / 세뱃돈 때문에 햄버거로 떼우는 건 절대 아니다",
+      [1, 1, 1, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      8,
+      7,
+      "반포 - 우리집 / 이제는 청소 잘 하는 좋은 남편",
+      [1, 1, 1, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      8,
+      8,
+      "강남 - 산부인과 / 나를 똑닮은 아들이..ㅜㅜ",
+      [1, 1, 1, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      8,
+      9,
+      "판교 - 미래벤처캐피탈 / 이게 잘 되어야 할텐데..",
+      [0, 1, 1, 1],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      9,
+      0,
+      "회사 - 화장실 / 9시는 주식 개장시간.. 옆 칸에서 매수 체결소리가 들리지만 다 이해한다. 나도 그랬었지..",
+      [1, 0, 1, 0],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      9,
+      1,
+      "고향 - 부모님댁 / 나를 자랑스러워 하시는 부모님",
+      [1, 1, 1, 0],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      9,
+      2,
+      "반포 - 리틀아메리카유치원 / 아들아 이대로만 자라다오",
+      [1, 1, 1, 0],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      9,
+      3,
+      "판교 - 샐러디 / 다이어트 시작..",
+      [1, 1, 1, 0],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      9,
+      4,
+      "내 회사 - 휴게실 / 직원들이 다들 코인 얘기에 심취해있다",
+      [1, 1, 1, 0],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      9,
+      5,
+      "한남동 - 레스토랑 / 후배에게 우리 회사에 들어오라고 열심히 설득중",
+      [1, 1, 1, 0],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      9,
+      6,
+      "관악산 - 연주대 / 한사랑 산악회에 가입하고 첫 등산",
+      [1, 1, 1, 0],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      9,
+      7,
+      "반포 - 우리집 / 아내의 표정이 심상치 않다",
+      [1, 1, 1, 0],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      9,
+      8,
+      "여의도 - 소고기집 / 대학 동기들 사이에서 나는 영웅",
+      [1, 1, 1, 0],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ],[
+      9,
+      9,
+      "회사 - 사무실 / 확장한 사무실이 마음에 든다",
+      [0, 1, 1, 0],
+      [
+        { "type": "battle", "monster": 1, "percent": 70 },
+        { "type": "item", "item": 1, "percent": 30 }
+      ]
+    ]
   ]
 }
