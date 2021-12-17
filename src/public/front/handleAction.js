@@ -26,6 +26,7 @@ const handleView = () => {
     // const { isFighting, enemy, log } = state;
     const levelSet = {1: '아기 진', 2: '청소년 진', 3: '개발자 진', 4: 'CEO 진'};
     const expSet = {1: ['키', 'cm'], 2: ['성적', '점'], 3: ['git commit', '번'], 4: ['기업 가치', '억']};
+    
     // 추후 삭제
     items.push('맥북 : 1 개 (임시)');
     items.push('연필 : 3 개 (임시)');
@@ -38,8 +39,8 @@ const handleView = () => {
     items.push('쪽쪽이 : 2 개 (임시)');
     items.push('쪽쪽이 : 2 개 (임시)');
     items.push('쪽쪽이 : 2 개 (임시)');
-    const log = `담당 일진(이)가 나타났다. <br/> 진아 빵좀 사와라... 진아 빵좀 사와라... 진아 빵좀 사와라...`;
-    const isFighting = 'true';
+    const log = state ? state.log : `담당 일진(이)가 나타났다. <br/> 진아 빵좀 사와라... 진아 빵좀 사와라... 진아 빵좀 사와라...`;
+    const isFighting = state ? state.isFighting : 'true';
 
     $('#level').text(`Level : ${level} (${levelSet[level]}) `);
     $('#hp').text(`체력 : ${HP} / ${maxHP} `);
@@ -57,9 +58,13 @@ const handleView = () => {
     if (isFighting) {
       $('.attack-btn').removeClass('hide');
       $('.run-btn').removeClass('hide');
+    } else {
+      $('.attack-btn').addClass('hide');
+      $('.run-btn').addClass('hide');
     }
 
     if (level === 4) $('.ending-btn').removeClass('hide');
+    else $('.ending-btn').addClass('hide');
 
     $('.map').html(makeMap(x, y, level));
   })
