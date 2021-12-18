@@ -23,50 +23,39 @@ const handleLogin = () => {
 
 const handleAction = async (action, method, data) => {
   const res = await sendRequest(`/${action}`, method, data);
-  const { x, y, level, exp, HP, maxHP, str, def, state, items } = res;
-  // const { isFighting, enemy, log } = state;
-  
-  // 추후 삭제
-  items.push('맥북 : 1 개 (임시)');
-  items.push('연필 : 3 개 (임시)');
-  items.push('쪽쪽이 : 2 개 (임시)');
-  items.push('쪽쪽이 : 2 개 (임시)');
-  items.push('쪽쪽이 : 2 개 (임시)');
-  items.push('쪽쪽이 : 2 개 (임시)');
-  items.push('쪽쪽이 : 2 개 (임시)');
-  items.push('쪽쪽이 : 2 개 (임시)');
-  items.push('쪽쪽이 : 2 개 (임시)');
-  items.push('쪽쪽이 : 2 개 (임시)');
-  items.push('쪽쪽이 : 2 개 (임시)');
-  const log = state ? state.log : `담당 일진(이)가 나타났다. <br/> 진아 빵좀 사와라... 진아 빵좀 사와라... 진아 빵좀 사와라...`;
-  const isFighting = state ? state.isFighting : 'true';
+  const { x, y, level, exp, HP, maxHp, str, def, state, items } = res;
+  const { status, log } = state;
   
   $('#profile-img').attr("src", `../images/${level}.png`)
   $('#level').text(`Level : ${level} (${levelSet[level]}) `);
-  $('#hp').text(`체력 : ${HP} / ${maxHP} `);
+  $('#hp').text(`체력 : ${HP} / ${maxHp} `);
   $('#str').text(`공격력 : ${str} `);
   $('#def').text(`방어력 : ${def} `);
   $('#exp').text(`${expSet[level][0]} : ${exp} ${expSet[level][1]} `);
-  $('.display_event_line').html(log);
-  items.forEach(item => {
+  $('.display_event_line').html(log.replaceAll("\n", "<br/>"));
+  $('.inventory').empty();
+  items.forEach(({ name, quantity }) => {
     const dom = $('<div class="item"></div>');
-    dom.text(item);
+    dom.text(`${name} : ${quantity} 개`);
     $('.inventory').append(dom);
   })
 
-  // true 가 문자열로 오진 않는지 체크
-  if (isFighting) {
+  // 버튼의 활성화 여부
+  $('.reset-btn').addClass('hide');
+  $('.attack-btn').addClass('hide');
+  $('.run-btn').addClass('hide');
+  $('.ending-btn').addClass('hide');
+  
+  if (status === 0) $('.reset-btn').removeClass('hide');
+  else if (status === 2)  $('.attack-btn').removeClass('hide');
+  else if (status === 3){
     $('.attack-btn').removeClass('hide');
-    $('.run-btn').removeClass('hide');
-  } else {
-    $('.attack-btn').addClass('hide');
     $('.run-btn').addClass('hide');
   }
 
   if (level === 4) $('.ending-btn').removeClass('hide');
-  else $('.ending-btn').addClass('hide');
 
-  $('.map').html(makeMap(x, y, level));
+  $('.map').html(makeMap(y, x, level));
 }
 
 

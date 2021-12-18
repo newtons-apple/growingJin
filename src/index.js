@@ -65,7 +65,7 @@ app.post("/register", async (req, res) => {
 
   const encryptedPassword = encryptPassword(password);
   const user = new User({ id, password: encryptedPassword });
-  const player = new Player({ name: id, user });
+  const player = new Player({ name: id, user , state: {status: 0}});
   user.player = player;
   await user.save();
   await player.save();

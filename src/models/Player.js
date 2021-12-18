@@ -17,7 +17,7 @@ const schema = new Schema({
 
     state: {status: Number, enemy: {id: Number, remainHp: Number}, log: String},
     //status : start:0, normal:1, encounter:2,battle:3
-    items: [{name:String,quantity:Number}],
+    items: [{name:String, quantity:Number}],
 
     user: {type: Schema.Types.ObjectId, ref: 'User'},
 });
