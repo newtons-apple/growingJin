@@ -10,14 +10,17 @@ const schema = new Schema({
     exp: {type: Number, default: 0},
     maxHp: {type: Number, default: 100},
     HP: {type: Number, default: 100},
-    str: {type: Number, default: 20},
-    def: {type: Number, default: 5},
+    
+    str: {type: Number, default: 18 + Math.floor(Math.random()*5)},
+    def: {type: Number, default: 3 + Math.floor(Math.random()*5)},
+
+    reroll: {type: Number, default: 5},
+
     x: {type: Number, default: 0},
     y: {type: Number, default: 0},
 
-    state: {status: Number, enemy: {id: Number, remainHp: Number}, log: String},
-    //status : start:0, normal:1, encounter:2,battle:3
-    items: [{name:String, quantity:Number}],
+    state: {isFighting: Boolean, enemy: {id: Number, remainHp: Number}, log: String},
+    items: [String],
 
     user: {type: Schema.Types.ObjectId, ref: 'User'},
 });

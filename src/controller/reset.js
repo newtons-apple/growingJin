@@ -2,6 +2,7 @@ const {Item,Player,User} = require('../models')
 
 
 const reset = async (req, res) => {
+    const player = req.player;
     if (player.state.status === 0) {
 
         player.str = 18 + Math.floor(Math.random()*5);
