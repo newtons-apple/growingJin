@@ -6,6 +6,8 @@ const crypto = require("crypto");
 const { constantManager, mapManager } = require("./datas/Manager");
 const { User, Item, Player } = require("./models");
 const { encryptPassword } = require("./util");
+const attack = require('./controller/attack');
+
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -68,6 +70,30 @@ app.post("/register", async (req, res) => {
   await player.save();
 
   return res.send('가입이 완료되었습니다. 로그인 후 진을 키워주세요!');
+})
+
+app.post("/move", (req, res) => {
+  console.log('hi move!');
+})
+
+app.post("/attack", (req, res) => {
+  console.log('hi attack!');
+})
+
+app.get("/run", (req, res) => {
+  console.log('hi run!');
+})
+
+app.get("/ending", (req, res) => {
+  console.log('hi ending!');
+})
+
+app.get("/reset", (req, res) => {
+  console.log('hi reset!');
+})
+
+app.get("/view", authentication, async (req, res) => {
+  res.send(req.player);
 })
 
 app.post("/action", authentication, async (req, res) => {
