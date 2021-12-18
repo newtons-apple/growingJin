@@ -72,23 +72,23 @@ app.post("/register", async (req, res) => {
   return res.send('가입이 완료되었습니다. 로그인 후 진을 키워주세요!');
 })
 
-app.post("/move", (req, res) => {
+app.post("/move", authentication, (req, res) => {
   console.log('hi move!');
 })
 
-app.post("/attack", (req, res) => {
+app.get("/attack", authentication, (req, res) => {
   console.log('hi attack!');
 })
 
-app.get("/run", (req, res) => {
+app.get("/run", authentication, (req, res) => {
   console.log('hi run!');
 })
 
-app.get("/ending", (req, res) => {
+app.get("/ending", authentication, (req, res) => {
   console.log('hi ending!');
 })
 
-app.get("/reset", (req, res) => {
+app.get("/reset", authentication, (req, res) => {
   console.log('hi reset!');
 })
 
