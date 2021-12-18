@@ -13,9 +13,12 @@ const move = async (req,res)=>{
     let x = player.x; //x는 +북,-남 방향
     let y = player.y; //y는 +동,-서 방향
     try{
+        if(!player.state.status){
+          player.state.status=1
+        }
         let canGo = mapManager.getField(x,y).canGo
         if(!canGo[direction]){
-            player.log = '이동하지 못했다. 보이지 않는 벽이 나를 막은 듯 하다. 다른 길로 가볼까?'
+            player.state.log = '이동하지 못했다. 보이지 않는 벽이 나를 막은 듯 하다. 다른 길로 가볼까?'
             console.log('cantgo')
             await player.save()
             return res.json(Player)
@@ -65,14 +68,14 @@ const move = async (req,res)=>{
                 console.log(event)
                 const log = `${event.name}\n큰 충격을 받았다. hp 절반이 줄어들었다.`
                 player.Hp = Math.floor(player.Hp/2)
-                player.state = {isFighting:false,log}
+                player.state = {status:1,log}
                 await player.save()
                 return res.json(player)
             }
             if (typeof _event ==='number'){
                 const randomMent = ['다행이다','무료하다','훗'][Math.floor(Math.random()*3)] 
                 const log = '아무일도 일어나지 않았다.'+randomMent
-                player.state = {isFighting:false,log}
+                player.state = {status:1,log}
                 await player.save()
               return res.json(player)
             }
@@ -82,14 +85,32 @@ const move = async (req,res)=>{
               const monster = monsterManager.getMonster(_event.monster)
               const log = `${monster.des}\n${monster.name}:"${monster.talk}"`
     
-              player.state = {isFighting:true,enemy:{id:monster.id,reaminHp:monster.hp},log}
+              player.state = {status:2,enemy:{id:monster.id,reaminHp:monster.hp},log}
               await player.save()
               return res.json(player)
           }
           if(_event.type==='item'){
               const item = itemManager.getItem(_event.item)
+              if(player.items.length===0){
+                player.items = [{name:item.name,quantity:1}]
+              }else{
+              let alreadyhaveIndex = player.items.map(myItem=>myItem.name).indexOf(item.name)
+              if(alreadyhaveIndex>=0){
+                player.items[alreadyhaveIndex].quantity++
+              }else{
+                player.items = [...player.items, {name:item.name,quantity:1}]
+              }
+              }
+              switch(item.type){
+                case '방어력':
+                  player.def +=item.buff
+                  break;
+                case '공격력':
+                  player.str +=item.buff
+                  break;
+              }
               const log = `${item.name}을(를) 획득했다. ${item.type}이 ${item.buff}만큼 증가했다..!`
-              player.state = {isFighting:false,log}
+              player.state = {status:1,log}
               await player.save()
               return res.json(player)
           }
