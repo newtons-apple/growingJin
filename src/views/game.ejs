@@ -40,6 +40,17 @@
             display: flex;
             flex-direction: column;
         }
+        
+        .reset-btn {
+            margin-top: 10px;
+            padding: 5px;
+            background-color: yellowgreen;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+
+            cursor: pointer;
+        }
 
         .inventory_container {
             width: 100%;
@@ -192,7 +203,6 @@
                 <div class="status_container">
                     <div class="profile">
                         <img id="profile-img"
-                        src="../images/123.jpg"
                         width="100%"
                         height="100%"
                         />
@@ -204,6 +214,7 @@
                         <div id="str"></div>
                         <div id="def"></div>
                         <div id="exp"></div>
+                        <div class="reset-btn">능력치 재설정</div>
                     </div>
                 </div>
                 <div class="inventory_container">
@@ -254,6 +265,11 @@
 
         const key = localStorage.getItem('_key');
         if (!key) location.href = "/"
+
+        const reset = $('.reset-btn');
+        reset.click(() => {
+            handleAction('reset', 'GET');
+        })
 
         const move = $('.move-btn');
         for(const dom of move){
