@@ -12,7 +12,7 @@ const attack = async (req, res) => {
         probability = Math.random();
         player.turn++;
         if (probability > 0.5) {
-            damage = player.str - monster.def;
+            damage = player.str - monster.def + Math.floor(Math.random() * 3);
             if (Math.sign(damage) === -1) {
                 damage = 0;
             }
@@ -50,7 +50,7 @@ const attack = async (req, res) => {
             player.auto = false;
             return res.send(player);
         } else {
-            damage = monster.str - player.def;
+            damage = monster.str - player.def + Math.floor(Math.random() * 3);
             if (Math.sign(damage) === -1) {
                 damage = 0;
             }
@@ -97,12 +97,11 @@ const attack = async (req, res) => {
     }
     // 자동 공격 이후 공격 누른 경우
 
-    while (player.HP >= player.maxHp * 0.2 && player.state.turn < 10) {
+    while (player.HP >= Math.floor(player.maxHp * 0.2) && player.state.turn < 10) {
         probability = Math.random();
-        player.state.turn++; // turn + 1;
+        player.state.turn++;
         if (probability > 0.5) {
-            damage = player.str - monster.def;
-            // TODO: 랜덤하게 +1 / +2 / +3 or critical(확률) or 0 걸어놓는다
+            damage = player.str - monster.def + Math.floor(Math.random() * 3);
             player.state.enemy.remainHp -= damage;
             player.state.log += `공격에 성공했다. ${damage}의 피해를 입혔다.\n`;
             if (player.state.enemy.remainHp <= 0) {
