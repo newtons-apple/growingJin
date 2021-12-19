@@ -17,45 +17,68 @@ const handleLogin = () => {
                 localStorage.setItem('_key', res.key);
                 location.href = '/game';
             } else alert("에러가 발생했습니다. 다시 시도해주세요.");
-        })
+        }).fail(() => alert("아이디와 비밀번호를 확인해주세요!"));
     })
 }
 
 const handleAction = async (action, method, data) => {
   const res = await sendRequest(`/${action}`, method, data);
-  const { x, y, level, exp, HP, maxHp, str, def, state, items } = res;
-  const { status, log } = state;
-  
+  const { x, y, level, exp, HP, maxHp, str, def, state, items, auto } = res;
+  const { status, log } = state; // let => const로 바꾸기
+
+  $('.reset-btn').addClass('hide');
+  $('.attack-btn').addClass('hide');
+  $('.run-btn').addClass('hide');
+  $('.ending-btn').addClass('hide');
+  $('.move-btn').addClass('hide');
+
   $('#profile-img').attr("src", `../images/${level}.png`)
   $('#level').text(`Level : ${level} (${levelSet[level]}) `);
   $('#hp').text(`체력 : ${HP} / ${maxHp} `);
   $('#str').text(`공격력 : ${str} `);
   $('#def').text(`방어력 : ${def} `);
   $('#exp').text(`${expSet[level][0]} : ${exp} ${expSet[level][1]} `);
-  $('.display_event_line').html(log.replaceAll("\n", "<br/>"));
+  $('.map').html(makeMap(y, x, level));
+
   $('.inventory').empty();
   items.forEach(({ name, quantity }) => {
     const dom = $('<div class="item"></div>');
     dom.text(`${name} : ${quantity} 개`);
     $('.inventory').append(dom);
   })
+  
+  // 자동공격시 대화창 표현 로직
+  if (auto) {
+    $('.move-btn').addClass('hide');
+    const autoAttackLog = log.split("\n");
+    let curLog = "";
+    for (const eachLog of autoAttackLog){
+      curLog += eachLog + "\n";
+      $('.display_event_line').html(curLog.replaceAll("\n", "<br/>"));
+      $(".display-container").scrollTop($(".display-container")[0].scrollHeight);
+      await sleep(500);
+    }
+  } else {
+    $('.display_event_line').html(log.replaceAll("\n", "<br/>"));
+    $(".display-container").scrollTop($(".display-container")[0].scrollHeight);
+  }
 
   // 버튼의 활성화 여부
-  $('.reset-btn').addClass('hide');
-  $('.attack-btn').addClass('hide');
-  $('.run-btn').addClass('hide');
-  $('.ending-btn').addClass('hide');
-  
-  if (status === 0) $('.reset-btn').removeClass('hide');
-  else if (status === 2)  $('.attack-btn').removeClass('hide');
+  if (status === 0) {
+    $('.reset-btn').removeClass('hide');
+    $('.move-btn').removeClass('hide');
+  }
+  else if (status === 1)  $('.move-btn').removeClass('hide');
+  else if (status === 2)  {
+    $('.attack-btn').removeClass('hide');
+    $('.move-btn').removeClass('hide');
+  }
   else if (status === 3){
     $('.attack-btn').removeClass('hide');
     $('.run-btn').addClass('hide');
   }
 
   if (level === 4) $('.ending-btn').removeClass('hide');
-
-  $('.map').html(makeMap(y, x, level));
 }
 
 
@@ -74,5 +97,8 @@ const makeMap = (x, y, level) => {
   }
   return map;
 }
+
+const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+
 
 export { handleLogin, handleAction };
