@@ -3,12 +3,15 @@ const {monsterManager} = require('../datas/Manager');
 const attack = async (req, res) => {
     const player = req.player;
     player.state.status = 3;
-    player.state.log = ""; // 공격과 피해 상태 저장
+    // player.state.log = ""; // 공격과 피해 상태 저장
     let probability = 0; // 무작위 확률로 공격 성공 or 실패
     let damage = 0; // 공격 주고 받는 데미지 -> 각각의 방어력에서 공격력을 뺀 값
     const monster = monsterManager.getMonster(player.state.enemy.id) // monster 정보
     console.log(player);
     if (player.HP < Math.floor(player.maxHp * 0.2) || player.turn >= 10) {
+        if(player.turn === 0){
+            player.state.log = "";
+        }
         probability = Math.random();
         player.turn++;
         if (probability > 0.7) {
@@ -97,7 +100,7 @@ const attack = async (req, res) => {
         }
     }
     // 자동 공격 이후 공격 누른 경우
-
+    player.state.log = "";
     while (player.HP >= Math.floor(player.maxHp * 0.2) && player.turn < 10) {
         probability = Math.random();
         player.turn++;
