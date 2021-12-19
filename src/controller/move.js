@@ -21,7 +21,7 @@ const move = async (req,res)=>{
             player.state.log = '이동하지 못했다. 보이지 않는 벽이 나를 막은 듯 하다. 다른 길로 가볼까?'
             console.log('cantgo')
             await player.save()
-            return res.json(Player)
+            return res.json(player)
         }
         if (direction === 0) {
           y += 1;
@@ -39,7 +39,7 @@ const move = async (req,res)=>{
         if (!field) res.sendStatus(400);
         player.x = x;
         player.y = y;
-    
+        player.mapDesc = field.description;
         const events = field.events;
         if(events.length > 0) {
             // Done : 확률별로 이벤트 발생하도록 변경
@@ -63,7 +63,7 @@ const move = async (req,res)=>{
                   console.log(event.id +1)
                   console.log(player.level)
                   return player.level===(event.id+1)
-                })
+                })[0]
               
                 console.log(event)
                 const log = `${event.name}\n큰 충격을 받았다. hp 절반이 줄어들었다.`
