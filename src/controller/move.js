@@ -40,57 +40,73 @@ const move = async (req,res)=>{
         player.x = x;
         player.y = y;
         player.mapDesc = field.description;
-        const events = field.events;
-        if(events.length > 0) {
             // Done : 확률별로 이벤트 발생하도록 변경
             const randomNum = Math.random()*100
-            const _event = events.reduce((p,c)=>{
-                if(typeof p ==='object'){
-                    return p
-                }
-                if((p+c.percent)>randomNum){
-                    return c
-                }else{
-                    p+=c.percent
-                    return p
-                }
-            },0)
-            if(player.level!==1&&randomNum<20){
+
+            if(player.level!==1&&randomNum<10){
                 const events = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../datas/events.json")))
                 console.log(events)
               
                 const event = events.filter((event,i)=>{
-                  console.log(event.id +1)
-                  console.log(player.level)
                   return player.level===(event.id+1)
                 })[0]
               
-                console.log(event)
                 const log = `${event.name}\n큰 충격을 받았다. hp 절반이 줄어들었다.`
-                player.Hp = Math.floor(player.Hp/2)
+                player.HP = Math.ceil(player.HP/2)
                 player.state = {status:1,log}
                 await player.save()
                 return res.json(player)
             }
-            if (typeof _event ==='number'){
+            if (randomNum<30){
                 const randomMent = ['다행이다','무료하다','훗'][Math.floor(Math.random()*3)] 
                 const log = '아무일도 일어나지 않았다.'+randomMent
                 player.state = {status:1,log}
                 await player.save()
               return res.json(player)
             }
-            if (_event.type === "battle") {
-              // TODO: 이벤트 별로 events.json 에서 불러와 이벤트 처리
-              //enemy.remainHp 입력
-              const monster = monsterManager.getMonster(_event.monster)
-              const log = `${monster.des}\n${monster.name}:"${monster.talk}"`
+            if (randomNum>=30&&randomNum<70) {
+              const monsterQuantity = [4,3,3,4]
+              const level = player.level
+              let id =0
+              for(let i=0;i<4;i++){
+                if(level<=i+1){
+                  id+= Math.floor(Math.random()*monsterQuantity[player.level-1])
+                  console.log(id+'ㅁ')
+                  break;
+                }
+                id+=monsterQuantity[i]
+                console.log(id)
+              }
+
+              console.log(id)
+              const monster = monsterManager.getMonster(id)
+              const log = `${monster.des}\n${monster.name}:"${monster.talk}"\n체력:${monster.hp} 공격력:${monster.str} 방어력: ${monster.def}`
     
               player.state = {status:2,enemy:{id:monster.id,reaminHp:monster.hp},log}
               await player.save()
               return res.json(player)
           }
-          if(_event.type==='item'){
-              const item = itemManager.getItem(_event.item)
+          if(randomNum>=70){
+              let id=0
+              for(let i=0;i<4;i++){
+                if(player.level<=i+1){
+                  id+= Math.floor(Math.random()*3)
+                  console.log(id+'ㅁ')
+                  break;
+                }
+                id+=3
+                console.log(id)
+              }
+              console.log(id)
+              const item = itemManager.getItem(id)
+              if(player.maxItemQuantity<=(player.items.reduce((p,c)=>p+c.quantity,0))){
+                const log = `${item.name}을(를) 발견했으나 가방에 더는 들어가지 않아 가져갈 수 없었다...`
+                player.state = {...player.state,log}
+                await player.save()
+                return res.json(player)
+              }
+
+              
               if(player.items.length===0){
                 player.items = [{name:item.name,quantity:1}]
               }else{
@@ -108,6 +124,10 @@ const move = async (req,res)=>{
                 case '공격력':
                   player.str +=item.buff
                   break;
+                case '체력':
+                  player.maxHp +=item.buff
+                  player.HP += item.buff
+                  break;
               }
               const log = `${item.name}을(를) 획득했다. ${item.type}이 ${item.buff}만큼 증가했다..!`
               player.state = {status:1,log}
@@ -115,7 +135,7 @@ const move = async (req,res)=>{
               return res.json(player)
           }
 
-        }
+        
     }catch(e){
         console.error(e)
     }
