@@ -75,9 +75,7 @@ app.post("/register", async (req, res) => {
 
 app.post("/move", authentication, move)
 
-app.get("/attack", authentication, (req, res) => {
-  console.log('hi attack!');
-})
+app.get("/attack", authentication, attack)
 
 app.get("/run", authentication, (req, res) => {
   console.log('hi run!');
