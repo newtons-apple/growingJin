@@ -23,7 +23,7 @@ const handleLogin = () => {
 
 const handleAction = async (action, method, data) => {
   const res = await sendRequest(`/${action}`, method, data);
-  const { x, y, level, exp, HP, maxHp, str, def, state, items, auto } = res;
+  const { x, y, level, exp, HP, maxHp, str, def, state, items, auto, mapDesc } = res;
   const { status, log } = state; // let => const로 바꾸기
 
   $('.reset-btn').addClass('hide');
@@ -38,6 +38,7 @@ const handleAction = async (action, method, data) => {
   $('#str').text(`공격력 : ${str} `);
   $('#def').text(`방어력 : ${def} `);
   $('#exp').text(`${expSet[level][0]} : ${exp} ${expSet[level][1]} `);
+  $('.map-description').text(`${mapDesc}`);
   $('.map').html(makeMap(y, x, level));
 
   $('.inventory').empty();
