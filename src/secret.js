@@ -1,4 +1,4 @@
-const mongoURL = 'mongodb+srv://test:test@cluster0.ksrd3.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+const mongoURL = 'mongodb+srv://test:test@testmongo.wrszo.mongodb.net/grwoingJin?retryWrites=true&w=majority'
 
 module.exports = {
     mongoURL,
