@@ -11,13 +11,13 @@ const attack = async (req, res) => {
     if (player.HP < Math.floor(player.maxHp * 0.2) || player.turn >= 10) {
         probability = Math.random();
         player.turn++;
-        if (probability > 0.5) {
+        if (probability > 0.7) {
             damage = player.str - monster.def + Math.floor(Math.random() * 3);
             if (Math.sign(damage) === -1) {
                 damage = 0;
             }
             player.state.enemy.remainHp -= damage;
-            player.state.log = `공격을 성공했습니다. ${damage}의 피해를 입혔습니다.\n`;
+            player.state.log += `공격을 성공했습니다. ${damage}의 피해를 입혔습니다.\n`;
             if (player.state.enemy.remainHp <= 0) {
                 player.state.log += '적을 무찔렀습니다!!!\n 체력의 5%를 회복했습니다.\n';
                 player.incrementHP(Math.floor(player.maxHp * 0.05));  // 남은 체력의 5% 회복
@@ -56,7 +56,7 @@ const attack = async (req, res) => {
                 damage = 0;
             }
             player.HP -= damage;
-            player.state.log = `공격을 실패했습니다. ${damage}의 피해를 입었습니다.\n`;
+            player.state.log += `공격을 실패했습니다. ${damage}의 피해를 입었습니다.\n`;
             if (player.HP <= 0) {
                 // player.state.log += '죽었습니다...\n 아이템을 잃었습니다.\n 스테이지의 처음으로 돌아갑니다.';
                 player.state.status = 1; // 전투 종료
@@ -102,7 +102,7 @@ const attack = async (req, res) => {
         probability = Math.random();
         player.turn++;
         console.log(player);
-        if (probability > 0.5) {
+        if (probability > 0.7) {
             damage = player.str - monster.def + Math.floor(Math.random() * 3);
             if (Math.sign(damage) === -1) {
                 damage = 0;
