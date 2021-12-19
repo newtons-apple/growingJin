@@ -19,17 +19,6 @@ const reset = async (req, res) => {
     return res.send(player);
 
     }
-
-module.exports = {
-    reset
 }
 
-
-
-    
-    
-
-
-
-
-}
+module.exports = reset;
