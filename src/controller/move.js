@@ -39,7 +39,7 @@ const move = async (req,res)=>{
         if (!field) res.sendStatus(400);
         player.x = x;
         player.y = y;
-    
+        player.mapDesc = field.description;
         const events = field.events;
         if(events.length > 0) {
             // Done : 확률별로 이벤트 발생하도록 변경

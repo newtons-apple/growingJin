@@ -14,7 +14,7 @@ const schema = new Schema({
     def: {type: Number, default: 5},
     x: {type: Number, default: 0},
     y: {type: Number, default: 0},
-
+    mapDesc:{type:String, default:"새로운 삶의 시작이다."},
     state: {status: Number, enemy: {id: Number, remainHp: Number}, log: String},
     //status : start:0, normal:1, encounter:2,battle:3
     items: [{name:String, quantity:Number}],
