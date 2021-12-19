@@ -10,8 +10,12 @@ const schema = new Schema({
     exp: {type: Number, default: 0},
     maxHp: {type: Number, default: 100},
     HP: {type: Number, default: 100},
-    str: {type: Number, default: 20},
-    def: {type: Number, default: 5},
+
+    str: {type: Number, default: 18 + Math.floor(Math.random()*5)},
+    def: {type: Number, default: 3 + Math.floor(Math.random()*5)},
+
+    reroll: {type: Number, default: 5},
+
     x: {type: Number, default: 0},
     y: {type: Number, default: 0},
     mapDesc:{type:String, default:"새로운 삶의 시작이다."},

@@ -42,6 +42,11 @@ app.get("/temp", (req, res) => {
   res.render("temp");
 })
 
+app.get("/ending", (req, res) => {
+  res.render("ending");
+})
+
+
 app.post("/login", async (req, res) => {
   const { id, password } = req.body;
   const user = await User.findOne({ id, password: encryptPassword(password) });
