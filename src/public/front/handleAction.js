@@ -13,7 +13,6 @@ const handleLogin = () => {
     loginForm.submit(e => {
         e.preventDefault();
         $.post('/login', loginForm.serialize(), (res) => {
-          console.log(res);
             if(res.key){
                 localStorage.setItem('_key', res.key);
                 location.href = '/game';
