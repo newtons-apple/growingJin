@@ -20,16 +20,8 @@ const reset = async (req, res) => {
 
     }
 
-module.exports = {
-    reset
 }
 
-
-
-    
-    
-
-
-
-
+module.exports = {
+    reset
 }
