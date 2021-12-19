@@ -49,7 +49,7 @@ const handleAction = async (action, method, data) => {
   })
 
   // 자동공격시 대화창 표현 로직
-  if (auto === 'true') {
+  if (auto) {
     $('.move-btn').addClass('hide');
     const autoAttackLog = log.split("\n");
     let curLog = "";

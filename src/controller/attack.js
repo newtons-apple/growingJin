@@ -7,8 +7,8 @@ const attack = async (req, res) => {
     let probability = 0; // 무작위 확률로 공격 성공 or 실패
     let damage = 0; // 공격 주고 받는 데미지 -> 각각의 방어력에서 공격력을 뺀 값
     const monster = monsterManager.getMonster(player.state.enemy.id) // monster 정보
-
-    if (player.HP < Math.floor(player.maxHp * 0.2) || player.state.turn >= 10) {
+    console.log(player);
+    if (player.HP < Math.floor(player.maxHp * 0.2) || player.turn >= 10) {
         probability = Math.random();
         player.turn++;
         if (probability > 0.5) {
@@ -19,8 +19,8 @@ const attack = async (req, res) => {
             player.state.enemy.remainHp -= damage;
             player.state.log = `공격을 성공했습니다. ${damage}의 피해를 입혔습니다.\n`;
             if (player.state.enemy.remainHp <= 0) {
-                player.state.log += '적을 무찔렀습니다!!!\n 남은 체력을 5%를 회복했습니다.\n';
-                player.HP += Math.floor(player.maxHp * 0.05);  // 남은 체력의 5% 회복
+                player.state.log += '적을 무찔렀습니다!!!\n 체력의 5%를 회복했습니다.\n';
+                player.incrementHP(Math.floor(player.maxHp * 0.05));  // 남은 체력의 5% 회복
                 player.exp += monster.exp;  // 경험치 획득
                 player.turn = 0; // 전투 종료 후 turn 리셋
                 player.state.status = 1; // status : normal
@@ -41,22 +41,22 @@ const attack = async (req, res) => {
                     }
                     await player.save();
                     player.auto = false;
-                    return res.send(player);
+                    return res.json(player);
                 }
                 await player.save();
                 player.auto = false;
-                return res.send(player);
+                return res.json(player);
             }
             await player.save();
             player.auto = false;
-            return res.send(player);
+            return res.json(player);
         } else {
             damage = monster.str - player.def + Math.floor(Math.random() * 3);
             if (Math.sign(damage) === -1) {
                 damage = 0;
             }
             player.HP -= damage;
-            player.state.log = `공격을 실패했습니다.. ${damage}의 피해를 입었습니다.\n`;
+            player.state.log = `공격을 실패했습니다. ${damage}의 피해를 입었습니다.\n`;
             if (player.HP <= 0) {
                 // player.state.log += '죽었습니다...\n 아이템을 잃었습니다.\n 스테이지의 처음으로 돌아갑니다.';
                 player.state.status = 1; // 전투 종료
@@ -89,28 +89,30 @@ const attack = async (req, res) => {
                 // 사망한 후 각 레벨에 따른 좌표 초기화
                 await player.save();
                 player.auto = true;
-                return res.send(player);
+                return res.json(player);
             }
             await player.save();
             player.auto = true;
-            return res.send(player);
+            return res.json(player);
         }
     }
     // 자동 공격 이후 공격 누른 경우
 
-    while (player.HP >= Math.floor(player.maxHp * 0.2) && player.state.turn < 10) {
+    while (player.HP >= Math.floor(player.maxHp * 0.2) && player.turn < 10) {
         probability = Math.random();
         player.turn++;
+        console.log(player);
         if (probability > 0.5) {
             damage = player.str - monster.def + Math.floor(Math.random() * 3);
             if (Math.sign(damage) === -1) {
                 damage = 0;
             }
             player.state.enemy.remainHp -= damage;
-            player.state.log += `공격에 성공했다. ${damage}의 피해를 입혔다.\n`;
+            player.state.log += `공격에 성공했습니다. ${damage}의 피해를 입혔습니다.\n`;
+            console.log(player);
             if (player.state.enemy.remainHp <= 0) {
-                player.state.log += '적을 무찔렀습니다!!!\n 남은 체력을 5%를 회복했습니다.\n';
-                player.HP += Math.floor(player.maxHp * 0.05);  // 남은 체력의 5% 회복
+                player.state.log += '적을 무찔렀습니다!!!\n 체력의 5%를 회복했습니다.\n';
+                player.incrementHP(Math.floor(player.maxHp * 0.05));  // 남은 체력의 5% 회복
                 player.exp += monster.exp;  // 경험치 획득
                 player.turn = 0; // 전투 종료 후 turn 리셋
                 player.state.status = 1; // status : normal
@@ -131,11 +133,11 @@ const attack = async (req, res) => {
                     }
                     await player.save();
                     player.auto = true;
-                    return res.send(player);
+                    return res.json(player);
                 }
                 await player.save();
                 player.auto = true;
-                return res.send(player);
+                return res.json(player);
             }
         } else {
             damage = monster.str - player.def + Math.floor(Math.random() * 3);
@@ -143,12 +145,12 @@ const attack = async (req, res) => {
                 damage = 0;
             }
             player.HP -= damage;
-            player.state.log = `공격을 실패했습니다.. ${damage}의 피해를 입었습니다.\n`;
+            player.state.log += `공격을 실패했습니다. ${damage}의 피해를 입었습니다.\n`;
         }
     }
     await player.save();
     player.auto = true;
-    return res.send(player);
+    return res.json(player);
 }
 // 자동 공격
 

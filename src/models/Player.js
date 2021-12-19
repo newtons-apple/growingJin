@@ -26,7 +26,7 @@ const schema = new Schema({
 
 schema.methods.incrementHP = function (hp) {
     const _hp = this.HP + hp;
-    this.HP = Math.min(Math.max(0, _hp), this.maxHP);
+    this.HP = Math.min(_hp, this.maxHp);
 };
 
 const Player = mongoose.model("Player", schema);
