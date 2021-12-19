@@ -47,9 +47,9 @@ const handleAction = async (action, method, data) => {
     dom.text(`${name} : ${quantity} 개`);
     $('.inventory').append(dom);
   })
-  
+
   // 자동공격시 대화창 표현 로직
-  if (auto) {
+  if (auto === 'true') {
     $('.move-btn').addClass('hide');
     const autoAttackLog = log.split("\n");
     let curLog = "";
