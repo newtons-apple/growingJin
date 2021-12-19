@@ -25,7 +25,7 @@ const handleLogin = () => {
 const handleAction = async (action, method, data) => {
   const res = await sendRequest(`/${action}`, method, data);
   const { x, y, level, exp, HP, maxHp, str, def, state, items, auto } = res;
-  let { status, log } = state; // let => const로 바꾸기
+  const { status, log } = state; // let => const로 바꾸기
 
   $('.reset-btn').addClass('hide');
   $('.attack-btn').addClass('hide');
