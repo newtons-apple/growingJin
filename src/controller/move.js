@@ -20,7 +20,9 @@ const move = async (req,res)=>{
         let canGo = mapManager.getField(x,y).canGo
         if(!canGo[direction]){
             player.state.log = '이동하지 못했다. 보이지 않는 벽이 나를 막은 듯 하다. 다른 길로 가볼까?'
+            player.state.status=1
             console.log('cantgo')
+            console.log(player)
             await player.save()
             return res.json(player)
         }
@@ -103,7 +105,7 @@ const move = async (req,res)=>{
               const item = itemManager.getItem(id)
               if(player.maxItemQuantity<=(player.items.reduce((p,c)=>p+c.quantity,0))){
                 const log = `${item.name}을(를) 발견했으나 가방에 더는 들어가지 않아 가져갈 수 없었다...`
-                player.state = {...player.state,log}
+                player.state = {status:1,log}
                 await player.save()
                 return res.json(player)
               }
