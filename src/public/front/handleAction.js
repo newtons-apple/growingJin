@@ -23,30 +23,16 @@ const handleLogin = () => {
 
 const handleAction = async (action, method, data) => {
   const res = await sendRequest(`/${action}`, method, data);
-  const { x, y, level, exp, HP, maxHp, str, def, state, items, auto, mapDesc } = res;
-  const { status, log } = state; // let => const로 바꾸기
+
+  const { x, y, level, exp, HP, maxHp, str, def, state, items, auto, mapDesc, maxItemQuantity } = res;
+  const { status, log } = state;
 
   $('.reset-btn').addClass('hide');
   $('.attack-btn').addClass('hide');
   $('.run-btn').addClass('hide');
   $('.ending-btn').addClass('hide');
   $('.move-btn').addClass('hide');
-
-  $('#profile-img').attr("src", `../images/${level}.png`)
-  $('#level').text(`Level : ${level} (${levelSet[level]}) `);
-  $('#hp').text(`체력 : ${HP} / ${maxHp} `);
-  $('#str').text(`공격력 : ${str} `);
-  $('#def').text(`방어력 : ${def} `);
-  $('#exp').text(`${expSet[level][0]} : ${exp} ${expSet[level][1]} `);
-  $('.map-description').text(`${mapDesc}`);
-  $('.map').html(makeMap(y, x, level));
-
-  $('.inventory').empty();
-  items.forEach(({ name, quantity }) => {
-    const dom = $('<div class="item"></div>');
-    dom.text(`${name} : ${quantity} 개`);
-    $('.inventory').append(dom);
-  })
+  if (level === 4) $('.ending-btn').removeClass('hide');
 
   // 자동공격시 대화창 표현 로직
   if (auto) {
@@ -64,6 +50,23 @@ const handleAction = async (action, method, data) => {
     $(".display-container").scrollTop($(".display-container")[0].scrollHeight);
   }
 
+  $('#profile-img').attr("src", `../images/${level}.png`)
+  $('#level').text(`Level : ${level} (${levelSet[level]}) `);
+  $('#hp').text(`체력 : ${HP} / ${maxHp} `);
+  $('#str').text(`공격력 : ${str} `);
+  $('#def').text(`방어력 : ${def} `);
+  if (level === 4) $('#exp').text(`${expSet[level][0]} : ${exp} ${expSet[level][1]}`)
+  else $('#exp').text(`${expSet[level][0]} : ${exp} / 100 ${expSet[level][1]}`);
+  $('.map-description').text(`${mapDesc}`);
+  $('.map').html(makeMap(y, x, level));
+  $('.inventory_title').text(`가방 - ${countItems(items)} / ${maxItemQuantity} 개`);
+  $('.inventory').empty();
+  items.forEach(({ name, quantity }) => {
+    const dom = $('<div class="item"></div>');
+    dom.text(`${name} : ${quantity} 개`);
+    $('.inventory').append(dom);
+  })
+
   // 버튼의 활성화 여부
   if (status === 0) {
     $('.reset-btn').removeClass('hide');
@@ -76,10 +79,8 @@ const handleAction = async (action, method, data) => {
   }
   else if (status === 3){
     $('.attack-btn').removeClass('hide');
-    $('.run-btn').addClass('hide');
+    $('.run-btn').removeClass('hide');
   }
-
-  if (level === 4) $('.ending-btn').removeClass('hide');
 }
 
 
@@ -97,6 +98,12 @@ const makeMap = (x, y, level) => {
       else map += canGoLine;
   }
   return map;
+}
+
+const countItems = (items) => {
+  return items.reduce((acc, item) => {
+    return acc += item.quantity
+  }, 0);
 }
 
 const sleep = (ms) => new Promise(r => setTimeout(r, ms));

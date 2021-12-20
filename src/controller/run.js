@@ -6,7 +6,8 @@ const run = async (req, res) => {
     const monster = monsterManager.getMonster(player.state.enemy.id)
     const log = `후.. ${monster.name}으로부터 도망쳤다`
         //status : normal로 변경
-    player.state = {status:1,log}
+    player.auto = false;
+    player.state = {status:1, log}
     
     await player.save();
     return res.send(player);
