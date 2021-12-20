@@ -9,7 +9,7 @@ const attack = async (req, res) => {
     const monster = monsterManager.getMonster(player.state.enemy.id) // monster 정보
     console.log(player);
     if (player.HP < Math.floor(player.maxHp * 0.2) || player.turn >= 10) {
-        if(player.turn === 0){
+        if (player.turn === 0) {
             player.state.log = "";
         }
         probability = Math.random();
@@ -99,7 +99,7 @@ const attack = async (req, res) => {
             return res.json(player);
         }
     }
-    // 자동 공격 이후 공격 누른 경우
+    // 자동 공격 이후 수동 공격
     player.state.log = "";
     while (player.HP >= Math.floor(player.maxHp * 0.2) && player.turn < 10) {
         probability = Math.random();
