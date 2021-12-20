@@ -10,8 +10,12 @@ const schema = new Schema({
     exp: {type: Number, default: 0},
     maxHp: {type: Number, default: 100},
     HP: {type: Number, default: 100},
-    str: {type: Number, default: 20},
-    def: {type: Number, default: 5},
+
+    str: {type: Number, default: 18 + Math.floor(Math.random()*5)},
+    def: {type: Number, default: 3 + Math.floor(Math.random()*5)},
+
+    reroll: {type: Number, default: 5},
+
     x: {type: Number, default: 0},
     y: {type: Number, default: 0},
     turn: {type: Number, default: 0},
@@ -19,7 +23,9 @@ const schema = new Schema({
     mapDesc: {type: String, default: "새로운 삶의 시작이다."},
     state: {status: Number, enemy: {id: Number, remainHp: Number}, log: String},
     //status : start:0, normal:1, encounter:2,battle:3
-    items: [{name: String, quantity: Number}],
+    items: [{name:String, quantity:Number}],
+    maxItemQuantity:{type:Number, default:5},
+    auto: {type: Boolean, default: false},
 
     user: {type: Schema.Types.ObjectId, ref: 'User'},
 });

@@ -23,8 +23,9 @@ const handleLogin = () => {
 
 const handleAction = async (action, method, data) => {
   const res = await sendRequest(`/${action}`, method, data);
-  const { x, y, level, exp, HP, maxHp, str, def, state, items, auto, mapDesc } = res;
-  const { status, log } = state; // let => const로 바꾸기
+
+  const { x, y, level, exp, HP, maxHp, str, def, state, items, auto, mapDesc, maxItemQuantity } = res;
+  const { status, log } = state;
 
   $('.reset-btn').addClass('hide');
   $('.attack-btn').addClass('hide');
@@ -37,10 +38,11 @@ const handleAction = async (action, method, data) => {
   $('#hp').text(`체력 : ${HP} / ${maxHp} `);
   $('#str').text(`공격력 : ${str} `);
   $('#def').text(`방어력 : ${def} `);
-  $('#exp').text(`${expSet[level][0]} : ${exp} ${expSet[level][1]} `);
+  if (level === 4) $('#exp').text(`${expSet[level][0]} : ${exp} ${expSet[level][1]}`)
+  else $('#exp').text(`${expSet[level][0]} : ${exp} / 100 ${expSet[level][1]}`);
   $('.map-description').text(`${mapDesc}`);
   $('.map').html(makeMap(y, x, level));
-
+  $('.inventory_title').text(`가방 - ${countItems(items)} / ${maxItemQuantity} 개`);
   $('.inventory').empty();
   items.forEach(({ name, quantity }) => {
     const dom = $('<div class="item"></div>');
@@ -76,7 +78,7 @@ const handleAction = async (action, method, data) => {
   }
   else if (status === 3){
     $('.attack-btn').removeClass('hide');
-    $('.run-btn').addClass('hide');
+    $('.run-btn').removeClass('hide');
   }
 
   if (level === 4) $('.ending-btn').removeClass('hide');
@@ -97,6 +99,12 @@ const makeMap = (x, y, level) => {
       else map += canGoLine;
   }
   return map;
+}
+
+const countItems = (items) => {
+  return items.reduce((acc, item) => {
+    return acc += item.quantity
+  }, 0);
 }
 
 const sleep = (ms) => new Promise(r => setTimeout(r, ms));
