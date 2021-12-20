@@ -16,6 +16,6 @@ const reset = async (req, res) => {
     await player.save();
     return res.send(player);
 
-}
+    }
 
-module.exports = reset
+module.exports = reset;

@@ -18,17 +18,20 @@ const schema = new Schema({
 
     x: {type: Number, default: 0},
     y: {type: Number, default: 0},
-    mapDesc:{type:String, default:"새로운 삶의 시작이다."},
+    turn: {type: Number, default: 0},
+    maxItemQuantity: {type: Number, default: 5},
+    mapDesc: {type: String, default: "새로운 삶의 시작이다."},
     state: {status: Number, enemy: {id: Number, remainHp: Number}, log: String},
     //status : start:0, normal:1, encounter:2,battle:3
     items: [{name:String, quantity:Number}],
+    maxItemQuantity:{type:Number, default:5},
 
     user: {type: Schema.Types.ObjectId, ref: 'User'},
 });
 
 schema.methods.incrementHP = function (hp) {
     const _hp = this.HP + hp;
-    this.HP = Math.min(Math.max(0, hp), this.maxHP);
+    this.HP = Math.min(_hp, this.maxHp);
 };
 
 const Player = mongoose.model("Player", schema);

@@ -44,8 +44,20 @@ app.get("/temp", (req, res) => {
   res.render("temp");
 })
 
-app.get("/ending", (req, res) => {
-  res.render("ending");
+
+app.get("/ending", authentication, (req, res) => {
+  if (player.exp >= 60) {
+    //유니콘 -> ending1
+    res.render("ending1", {});
+
+  } else if (player.exp >= 50) {
+    //실버타운 -> ending2
+    res.render("ending2", {});
+
+  } else if (player.exp > 40) {
+    //과로사 -> ending3
+    res.render("ending3", {});
+  }
 })
 
 
@@ -82,17 +94,11 @@ app.post("/register", async (req, res) => {
 
 app.post("/move", authentication, move)
 
-app.post("/attack", authentication, (req, res) => {
-  console.log('hi attack!');
-})
+app.get("/attack", authentication, attack)
 
-app.post("/run", authentication, (req, res) => {
-  console.log('hi run!');
-})
+app.post("/run", authentication, run)
 
-app.get("/ending", authentication, (req, res) => {
-  console.log('hi ending!');
-})
+app.get("/ending", authentication, ending)
 
 app.get("/reset", authentication, reset);
 
