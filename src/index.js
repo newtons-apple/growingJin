@@ -43,15 +43,15 @@ app.get("/game", (req, res) => {
 
 app.get("/ending", authentication, (req, res) => {
   const player = req.player
-  if (player.exp >= 600) {
+  if (player.exp >= 200) {
     //유니콘 -> ending1
     res.render("ending1");
 
-  } else if (player.exp >= 500) {
+  } else if (player.exp >= 100) {
     //실버타운 -> ending2
     res.render("ending2");
 
-  } else if (player.exp > 300) {
+  } else {
     //환자 -> ending3
     res.render("ending3");
   }
