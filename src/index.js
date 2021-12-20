@@ -46,6 +46,7 @@ app.get("/temp", (req, res) => {
 
 
 app.get("/ending", authentication, (req, res) => {
+  const player = req.player;
   if (player.exp >= 60) {
     //유니콘 -> ending1
     res.render("ending1");
