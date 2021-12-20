@@ -12,6 +12,7 @@ const move = async (req,res)=>{
     const direction = parseInt(req.body.direction, 0); // 0 동. 1 서 . 2 남. 3 북.
     let x = player.x; //x는 +북,-남 방향
     let y = player.y; //y는 +동,-서 방향
+    player.auto = false;
     try{
         if(!player.state.status){
           player.state.status=1
@@ -82,7 +83,7 @@ const move = async (req,res)=>{
 
               console.log(id)
               const monster = monsterManager.getMonster(id)
-              const log = `${monster.des}\n${monster.name}:"${monster.talk}"\n체력:${monster.hp} 공격력:${monster.str} 방어력: ${monster.def}`
+              const log = `${monster.des}\n${monster.name}:"${monster.talk}"\n체력:${monster.hp} 공격력:${monster.str} 방어력: ${monster.def}\n`
     
               player.state = {status:2,enemy:{id:monster.id,remainHp:monster.hp},log}
 
