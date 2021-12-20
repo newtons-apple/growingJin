@@ -7,7 +7,8 @@ const { constantManager, mapManager } = require("./datas/Manager");
 const { User, Item, Player } = require("./models");
 const { encryptPassword } = require("./util");
 const attack = require('./controller/attack');
-const move = require('./controller/move')
+const move = require('./controller/move');
+const reset = require('./controller/reset');
 
 
 const app = express();
@@ -41,6 +42,11 @@ app.get("/game", (req, res) => {
 app.get("/temp", (req, res) => {
   res.render("temp");
 })
+
+app.get("/ending", (req, res) => {
+  res.render("ending");
+})
+
 
 app.post("/login", async (req, res) => {
   const { id, password } = req.body;
@@ -85,9 +91,7 @@ app.get("/ending", authentication, (req, res) => {
   console.log('hi ending!');
 })
 
-app.get("/reset", authentication, (req, res) => {
-  console.log('hi reset!');
-})
+app.get("/reset", authentication, reset);
 
 app.get("/view", authentication, async (req, res) => {
   res.send(req.player);
