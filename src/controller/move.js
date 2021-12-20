@@ -46,6 +46,7 @@ const move = async (req,res)=>{
 
             if(player.level!==1&&randomNum<10){
                 const events = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../datas/events.json")))
+
                 const event = events.filter((event,i)=>{
                   return player.level===(event.id+1)
                 })[0]
@@ -87,10 +88,12 @@ const move = async (req,res)=>{
               for(let i=0;i<4;i++){
                 if(player.level<=i+1){
                   id+= Math.floor(Math.random()*3)
+
                   break;
                 }
                 id+=3
               }
+
               const item = itemManager.getItem(id)
               if(player.maxItemQuantity<=(player.items.reduce((p,c)=>p+c.quantity,0))){
                 const log = `${item.name}을(를) 발견했으나 가방에 더는 들어가지 않아 가져갈 수 없었다...`
