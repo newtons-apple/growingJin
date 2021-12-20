@@ -12,6 +12,7 @@ const move = async (req,res)=>{
     const direction = parseInt(req.body.direction, 0); // 0 동. 1 서 . 2 남. 3 북.
     let x = player.x; //x는 +북,-남 방향
     let y = player.y; //y는 +동,-서 방향
+    player.auto = false;
     try{
         if(!player.state.status){
           player.state.status=1
@@ -19,7 +20,9 @@ const move = async (req,res)=>{
         let canGo = mapManager.getField(x,y).canGo
         if(!canGo[direction]){
             player.state.log = '이동하지 못했다. 보이지 않는 벽이 나를 막은 듯 하다. 다른 길로 가볼까?'
+            player.state.status=1
             console.log('cantgo')
+            console.log(player)
             await player.save()
             return res.json(player)
         }
@@ -80,9 +83,9 @@ const move = async (req,res)=>{
 
               console.log(id)
               const monster = monsterManager.getMonster(id)
-              const log = `${monster.des}\n${monster.name}:"${monster.talk}"\n체력:${monster.hp} 공격력:${monster.str} 방어력: ${monster.def}`
+              const log = `${monster.des}\n${monster.name}:"${monster.talk}"\n체력:${monster.hp} 공격력:${monster.str} 방어력: ${monster.def}\n`
     
-              player.state = {status:2,enemy:{id:monster.id,reaminHp:monster.hp},log}
+              player.state = {status:2,enemy:{id:monster.id,remainHp:monster.hp},log}
 
               await player.save()
               return res.json(player)
@@ -102,7 +105,7 @@ const move = async (req,res)=>{
               const item = itemManager.getItem(id)
               if(player.maxItemQuantity<=(player.items.reduce((p,c)=>p+c.quantity,0))){
                 const log = `${item.name}을(를) 발견했으나 가방에 더는 들어가지 않아 가져갈 수 없었다...`
-                player.state = {...player.state,log}
+                player.state = {status:1,log}
                 await player.save()
                 return res.json(player)
               }

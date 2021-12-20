@@ -9,8 +9,8 @@ const { encryptPassword } = require("./util");
 const attack = require('./controller/attack');
 const move = require('./controller/move');
 const reset = require('./controller/reset');
-const ending = require('./controller/ending');
 const run = require('./controller/run');
+
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -48,15 +48,15 @@ app.get("/temp", (req, res) => {
 app.get("/ending", authentication, (req, res) => {
   if (player.exp >= 60) {
     //유니콘 -> ending1
-    res.render("ending1", {});
+    res.render("ending1");
 
   } else if (player.exp >= 50) {
     //실버타운 -> ending2
-    res.render("ending2", {});
+    res.render("ending2");
 
   } else if (player.exp > 40) {
-    //과로사 -> ending3
-    res.render("ending3", {});
+    //환자 -> ending3
+    res.render("ending3");
   }
 })
 
@@ -92,79 +92,16 @@ app.post("/register", async (req, res) => {
   return res.send('가입이 완료되었습니다. 로그인 후 진을 키워주세요!');
 })
 
-app.post("/move", authentication, move)
+app.post("/move", authentication, move);
 
-app.get("/attack", authentication, attack)
+app.get("/attack", authentication, attack);
 
-app.post("/run", authentication, run)
-
-app.get("/ending", authentication, ending)
+app.get("/run", authentication, run);
 
 app.get("/reset", authentication, reset);
 
 app.get("/view", authentication, async (req, res) => {
   res.send(req.player);
 })
-
-// app.post("/action", authentication, async (req, res) => {
-//   const { action } = req.body;
-//   const player = req.player;
-//   let event = null;
-//   let field = null;
-//   let actions = [];
-//   if (action === "query") {
-//     field = mapManager.getField(req.player.x, req.player.y);
-//   } else if (action === "move") {
-//     const direction = parseInt(req.body.direction, 0); // 0 북. 1 동 . 2 남. 3 서.
-//     let x = req.player.x;
-//     let y = req.player.y;
-//     if (direction === 0) {
-//       y -= 1;
-//     } else if (direction === 1) {
-//       x += 1;
-//     } else if (direction === 2) {
-//       y += 1;
-//     } else if (direction === 3) {
-//       x -= 1;
-//     } else {
-//       res.sendStatus(400);
-//     }
-//     field = mapManager.getField(x, y);
-//     if (!field) res.sendStatus(400);
-//     player.x = x;
-//     player.y = y;
-
-//     const events = field.events;
-//     const actions = [];
-//     if (events.length > 0) {
-//       // TODO : 확률별로 이벤트 발생하도록 변경
-//       const _event = events[0];
-//       if (_event.type === "battle") {
-//         // TODO: 이벤트 별로 events.json 에서 불러와 이벤트 처리
-
-//         event = { description: "늑대와 마주쳐 싸움을 벌였다." };
-//         player.incrementHP(-1);
-//       } else if (_event.type === "item") {
-//         event = { description: "포션을 획득해 체력을 회복했다." };
-//         player.incrementHP(1);
-//         player.HP = Math.min(player.maxHP, player.HP + 1);
-//       }
-//     }
-
-//     await player.save();
-//   }
-
-//   field.canGo.forEach((direction, i) => {
-//     if (direction === 1) {
-//       actions.push({
-//         url: "/action",
-//         text: i,
-//         params: { direction: i, action: "move" }
-//       });
-//     }
-//   });
-
-//   return res.send({ player, field, event, actions });
-// });
 
 app.listen(3000);
