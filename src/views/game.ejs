@@ -261,7 +261,7 @@
         </div>
 
     <script type="module">
-        import { handleAction } from '../front/handleAction.js';
+        import { handleAction, handleEnding } from '../front/handleAction.js';
 
         const key = localStorage.getItem('_key');
         if (!key) location.href = "/"
@@ -289,7 +289,7 @@
 
         const ending = $('.ending-btn');
         ending.click(() => {
-            handleAction('ending', 'GET');
+            handleEnding();
         })
 
         handleAction('view', 'GET');

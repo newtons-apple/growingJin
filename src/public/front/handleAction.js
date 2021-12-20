@@ -21,6 +21,17 @@ const handleLogin = () => {
     })
 }
 
+const handleEnding = () => {
+  $.ajax({
+    type: "GET",
+    url: "/ending",
+    headers: { authorization: `Bearer ${key}` }
+  }).done((res) => {
+    $('html').html(res);
+  })
+}
+
+
 const handleAction = async (action, method, data) => {
   const res = await sendRequest(`/${action}`, method, data);
 
@@ -109,4 +120,4 @@ const countItems = (items) => {
 const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 
 
-export { handleLogin, handleAction };
+export { handleLogin, handleAction, handleEnding };

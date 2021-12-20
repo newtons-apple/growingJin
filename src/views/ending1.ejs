@@ -3,7 +3,7 @@
     </head>
         <body>
             <div class = "img">
-                <img src="../public/images/unicornjin.png"/>
+                <img src="../images/unicornjin.png"/>
             </div>
             <style>
                 .img{
@@ -44,13 +44,8 @@
             
             <div class = "button">
                 <br>
-                <input type = "button" value = "게임 다시하기" onclick ="movepage()"/>
+                <input type = "button" value = "게임 다시하기" onclick ="(() => {location.href = '/game'})()"/>
 
-                <script type = "text/javascript">
-                    function movepage() {
-                        location.href = "/";
-                    }
-                </script>
             <style>
                 .button{
                     width: 80;
