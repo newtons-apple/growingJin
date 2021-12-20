@@ -17,6 +17,4 @@ const ending = async (req, res) => {
 
 }
 
-module.exports = {
-    ending
-}
+module.exports = ending
