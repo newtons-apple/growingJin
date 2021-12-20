@@ -1,10 +1,4 @@
-<<<<<<< HEAD
-
-   
-const {monsterManager} = require('../datas/Manager');
-=======
 const {monsterManager, mapManager} = require('../datas/Manager');
->>>>>>> main
 const startPlace = {1: [0, 0], 2: [1, 0], 3: [3, 0], 4: [6, 0]};
 
 const attack = async (req, res) => {
