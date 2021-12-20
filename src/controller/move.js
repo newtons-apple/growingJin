@@ -21,8 +21,6 @@ const move = async (req,res)=>{
         if(!canGo[direction]){
             player.state.log = '이동하지 못했다. 보이지 않는 벽이 나를 막은 듯 하다. 다른 길로 가볼까?'
             player.state.status=1
-            console.log('cantgo')
-            console.log(player)
             await player.save()
             return res.json(player)
         }
@@ -48,12 +46,10 @@ const move = async (req,res)=>{
 
             if(player.level!==1&&randomNum<10){
                 const events = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../datas/events.json")))
-                console.log(events)
 
                 const event = events.filter((event,i)=>{
                   return player.level===(event.id+1)
                 })[0]
-                console.log(event)
                 const log = `${event.name}\n큰 충격을 받았다. hp 절반이 줄어들었다.`
                 player.HP = Math.ceil(player.HP/2)
                 player.state = {status:1,log}
@@ -74,14 +70,11 @@ const move = async (req,res)=>{
               for(let i=0;i<4;i++){
                 if(level<=i+1){
                   id+= Math.floor(Math.random()*monsterQuantity[player.level-1])
-                  console.log(id+'ㅁ')
                   break;
                 }
                 id+=monsterQuantity[i]
-                console.log(id)
               }
 
-              console.log(id)
               const monster = monsterManager.getMonster(id)
               const log = `${monster.des}\n${monster.name}:"${monster.talk}"\n체력:${monster.hp} 공격력:${monster.str} 방어력: ${monster.def}\n`
     
@@ -95,13 +88,12 @@ const move = async (req,res)=>{
               for(let i=0;i<4;i++){
                 if(player.level<=i+1){
                   id+= Math.floor(Math.random()*3)
-                  console.log(id+'ㅁ')
+
                   break;
                 }
                 id+=3
-                console.log(id)
               }
-              console.log(id)
+
               const item = itemManager.getItem(id)
               if(player.maxItemQuantity<=(player.items.reduce((p,c)=>p+c.quantity,0))){
                 const log = `${item.name}을(를) 발견했으나 가방에 더는 들어가지 않아 가져갈 수 없었다...`
