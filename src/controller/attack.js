@@ -1,16 +1,16 @@
-const {monsterManager} = require('../datas/Manager');
+const {monsterManager, mapManager} = require('../datas/Manager');
 const startPlace = {1: [0, 0], 2: [1, 0], 3: [3, 0], 4: [6, 0]};
 
 const attack = async (req, res) => {
     const player = req.player;
-    player.state.status = 3;
     let probability = 0; // 무작위 확률로 공격 성공 or 실패
     let damage = 0; // 공격 주고 받는 데미지 -> 각각의 방어력에서 공격력을 뺀 값
     const MAX_EXP = 100;
     const monster = monsterManager.getMonster(player.state.enemy.id) // monster 정보
+    player.state.status = 3;
 
     if (player.HP < Math.floor(player.maxHp * 0.2) || player.turn >= 10) {
-        if(player.turn === 0){
+        if (player.turn === 0) {
             player.state.log = "";
         }
         probability = Math.random();
@@ -34,6 +34,7 @@ const attack = async (req, res) => {
                     player.state.log += '레벨업하였습니다.\n 체력을 회복했습니다.\n 다음 스테이지로 이동합니다.\n';
                     player.x = startPlace[player.level][0];
                     player.y = startPlace[player.level][1];
+                    mapInfo(player);
                 }
             }
             await player.save();
@@ -62,6 +63,7 @@ const attack = async (req, res) => {
                 player.turn = 0; // 전투 종료 후 turn 리셋
                 player.x = startPlace[player.level][0];
                 player.y = startPlace[player.level][1];
+                mapInfo(player);
             }
             await player.save();
             player.auto = false;
@@ -74,7 +76,7 @@ const attack = async (req, res) => {
     while (player.HP >= Math.floor(player.maxHp * 0.2) && player.turn < 10) {
         probability = Math.random();
         player.turn++;
-        if (probability > 0.5) {
+        if (probability > 0.9) {
             damage = player.str - monster.def + Math.floor(Math.random() * 3);
             damage = Math.max(0, damage);
             player.state.enemy.remainHp -= damage;
@@ -93,18 +95,20 @@ const attack = async (req, res) => {
                     player.state.log += '레벨업하였습니다.\n 체력을 회복했습니다.\n 다음 스테이지로 이동합니다.\n';
                     player.x = startPlace[player.level][0];
                     player.y = startPlace[player.level][1];
+                    mapInfo(player);
                 }
-                await player.save();
-                player.auto = true;
-                return res.json(player);
-                // break;
+                break;
             }
         } else {
             damage = monster.str - player.def + Math.floor(Math.random() * 3);
             damage = Math.max(0, damage);
             player.HP -= damage;
             player.state.log += `공격을 실패했습니다. ${damage}의 피해를 입었습니다.\n적의 남은 체력 : ${Math.max(0, player.state.enemy.remainHp)} / ${monster.hp}\n`;
-            // player.HP가 음수면 치명적피해 코드 추가
+            if (player.HP <= 0) {
+                player.state.log += '치명상을 입었습니다.\n 죽기 일보 직전입니다.\n';
+                player.HP = Math.floor(player.maxHp * 0.01)
+                break;
+            }
         }
     }
     await player.save();
@@ -112,5 +116,10 @@ const attack = async (req, res) => {
     return res.json(player);
 }
 // 자동 공격
+
+const mapInfo = (player) => {
+    const field = mapManager.getField(player.x,player.y);
+    player.mapDesc = field.description;
+}
 
 module.exports = attack;
