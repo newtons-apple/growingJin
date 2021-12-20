@@ -1,6 +1,6 @@
 /**
  * @author g1
- * @param 
+ * @param
  */
  const {monsterManager, mapManager, itemManager} = require('../datas/Manager');
 const {Item,Player,User} = require('../models')
@@ -34,7 +34,7 @@ const move = async (req,res)=>{
         } else {
           res.sendStatus(400);
         }
-    
+
         const field = mapManager.getField(x, y);
         if (!field) res.sendStatus(400);
         player.x = x;
@@ -46,11 +46,11 @@ const move = async (req,res)=>{
             if(player.level!==1&&randomNum<10){
                 const events = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../datas/events.json")))
                 console.log(events)
-              
+
                 const event = events.filter((event,i)=>{
                   return player.level===(event.id+1)
                 })[0]
-              
+                console.log(event)
                 const log = `${event.name}\n큰 충격을 받았다. hp 절반이 줄어들었다.`
                 player.HP = Math.ceil(player.HP/2)
                 player.state = {status:1,log}
@@ -83,6 +83,7 @@ const move = async (req,res)=>{
               const log = `${monster.des}\n${monster.name}:"${monster.talk}"\n체력:${monster.hp} 공격력:${monster.str} 방어력: ${monster.def}`
     
               player.state = {status:2,enemy:{id:monster.id,reaminHp:monster.hp},log}
+
               await player.save()
               return res.json(player)
           }
@@ -139,7 +140,7 @@ const move = async (req,res)=>{
     }catch(e){
         console.error(e)
     }
-        
+
 return res.status(400).json({error:'something wrong'})
 }
 
