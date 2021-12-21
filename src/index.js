@@ -86,7 +86,7 @@ app.post("/register", async (req, res) => {
   await user.save();
   await player.save();
 
-  return res.send('가입이 완료되었습니다. 로그인 후 진을 키워주세요!');
+  return res.send('가입이 완료되었습니다. 뒤로가기를 누르신 뒤 로그인 후 진을 키워주세요!');
 })
 
 app.post("/move", authentication, move);
