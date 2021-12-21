@@ -76,7 +76,7 @@ const attack = async (req, res) => {
     while (player.HP >= Math.floor(player.maxHp * 0.2) && player.turn < 10) {
         probability = Math.random();
         player.turn++;
-        if (probability > 0.9) {
+        if (probability > 0.5) {
             damage = player.str - monster.def + Math.floor(Math.random() * 3);
             damage = Math.max(0, damage);
             player.state.enemy.remainHp -= damage;
